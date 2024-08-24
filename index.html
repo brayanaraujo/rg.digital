@@ -208,19 +208,14 @@
             function showPage(pageId) {
                 // Hide all pages
                 document.querySelectorAll('.page-content').forEach(page => {
-                    page.classList.remove('visible', 'entering');
-                    page.classList.add('hidden');
+                    if (page.id === 'page-' + pageId) {
+                        page.classList.remove('hidden');
+                        page.classList.add('visible');
+                    } else {
+                        page.classList.add('hidden');
+                        page.classList.remove('visible');
+                    }
                 });
-
-                // Show the new page
-                var newPage = document.getElementById('page-' + pageId);
-                newPage.classList.remove('hidden');
-                newPage.classList.add('entering');
-
-                setTimeout(() => {
-                    newPage.classList.remove('entering');
-                    newPage.classList.add('visible');
-                }, 100); // Slight delay for smooth transition
 
                 // Update active tab
                 document.querySelectorAll('.tab-link').forEach(link => {
@@ -245,7 +240,7 @@
             // Handle swipe to change pages
             let touchStartX = 0;
             let touchEndX = 0;
-            const swipeThreshold = 50; // Ajuste o limite do swipe
+            const swipeThreshold = 50; // Adjust swipe threshold
 
             document.addEventListener('touchstart', function(event) {
                 touchStartX = event.changedTouches[0].screenX;
