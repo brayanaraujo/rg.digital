@@ -21,13 +21,13 @@
         .hidden { display: none; }
         .page-content img { max-width: 100%; }
         .update-info { margin-bottom: 10px; }
-        
+
         /* Ajuste da altura da tab bar */
         .toolbar.toolbar-bottom {
             height: 40px; /* Ajuste conforme necessário */
             line-height: 40px; /* Centraliza o ícone verticalmente */
         }
-        
+
         .toolbar-inner {
             padding: 0 5px;
         }
@@ -51,6 +51,11 @@
             .toolbar-inner i {
                 font-size: 20px; /* Ajuste o tamanho do ícone conforme necessário */
             }
+        }
+
+        /* Estilos para a tab bar ativa */
+        .tab-link.active {
+            color: #2196f3; /* Cor do link ativo */
         }
     </style>
 </head>
@@ -96,7 +101,7 @@
                         </div>
                         <div class="navbar-divider"></div> <!-- Adiciona o traço delimitador -->
                     </div>
-                    
+
                     <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="update-info" id="update-info">
@@ -196,6 +201,8 @@
                 });
                 // Show the selected page
                 document.getElementById('page-' + pageId).classList.remove('hidden');
+                
+                // Update tab links
                 document.querySelectorAll('.tab-link').forEach(function(link) {
                     link.classList.remove('active');
                 });
