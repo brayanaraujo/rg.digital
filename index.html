@@ -60,7 +60,7 @@
 
         /* Ajuste da margem superior da imagem do QR Code */
         #page-link3 .block {
-            margin: 50px 0 0 0; /* Ajuste conforme necessário */
+            margin-top: 20px; /* Ajuste conforme necessário */
         }
     </style>
 </head>
@@ -72,15 +72,15 @@
             <!-- TAB BAR -->
             <div class="toolbar toolbar-bottom">
                 <div class="toolbar-inner display-flex">
-                    <a href="#" class="tab-link link active" data-link="index" onclick="showPage('index')">
+                    <a href="#" class="tab-link link active" data-link="index" onclick="handleTabClick('index')">
                         <i class="ri-account-box-fill"></i>
                         <span></span>
                     </a>
-                    <a href="#" class="tab-link link" data-link="link2" onclick="showPage('link2')">
+                    <a href="#" class="tab-link link" data-link="link2" onclick="handleTabClick('link2')">
                         <i class="ri-fingerprint-fill"></i>
                         <span></span>
                     </a>
-                    <a href="#" class="tab-link link" data-link="link3" onclick="showPage('link3')">
+                    <a href="#" class="tab-link link" data-link="link3" onclick="handleTabClick('link3')">
                         <i class="ri-qr-code-line"></i>
                         <span></span>
                     </a>
@@ -170,7 +170,7 @@
                         <div class="update-info" id="update-info-link3">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
                         </div>
-                        <div class="center" style="margin-top: 0;">
+                        <div class="center" style="margin-top: 20px;">
                             <div class="progress-container">
                                 <div class="progress-bar"></div>
                             </div>
@@ -278,8 +278,21 @@
                 }
             }
 
+            function handleTabClick(pageId) {
+                showPage(pageId);
+                event.preventDefault(); // Prevent default link behavior
+            }
+
             // Initialize the default page
             showPage('index');
+
+            // Bind tab links
+            document.querySelectorAll('.tab-link').forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    var pageId = this.getAttribute('data-link');
+                    handleTabClick(pageId);
+                });
+            });
         });
     </script>
 </body>
