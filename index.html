@@ -21,6 +21,37 @@
         .hidden { display: none; }
         .page-content img { max-width: 100%; }
         .update-info { margin-bottom: 10px; }
+        
+        /* Ajuste da altura da tab bar */
+        .toolbar.toolbar-bottom {
+            height: 50px; /* Ajuste conforme necessário */
+            line-height: 50px; /* Centraliza o ícone verticalmente */
+        }
+        
+        .toolbar-inner {
+            padding: 0 10px;
+        }
+
+        /* Centralização dos títulos da navbar */
+        .navbar .title {
+            text-align: center;
+            flex: 1;
+        }
+
+        .navbar .left, .navbar .right {
+            flex: 0 0 auto;
+        }
+
+        @media (max-width: 767px) {
+            .navbar .title {
+                font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
+            }
+
+            /* Ajuste do espaço dos ícones na tab bar */
+            .toolbar-inner i {
+                font-size: 20px; /* Ajuste o tamanho do ícone conforme necessário */
+            }
+        }
     </style>
 </head>
 <body>
@@ -183,34 +214,34 @@
 
             // Call updateDateTime initially and set up interval
             updateDateTime();
-            timerId = setInterval(updateDateTime, 60000); // 60000 milliseconds = 1 minute
+            timerId = setInterval(updateDateTime, 60000); // Update every minute
 
-            // Add event listener for page change
-            document.querySelectorAll('.tab-link').forEach(function(link) {
-                link.addEventListener('click', function() {
-                    var pageId = link.getAttribute('data-link');
-                    showPage(pageId);
-                });
+            // Handle swipe to change pages
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            document.addEventListener('touchstart', function(event) {
+                touchStartX = event.changedTouches[0].screenX;
             });
 
-            // Swipe navigation
-            var view = new Framework7.View('.view-main', {
-                // Configure swipe navigation
-                swipeEnabled: true,
-                swipeHandler: function(e) {
-                    if (e.swipeDirection === 'left') {
-                        // Swipe left (next page)
-                        var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
-                        var nextPageId = getNextPageId(currentPageId);
-                        showPage(nextPageId);
-                    } else if (e.swipeDirection === 'right') {
-                        // Swipe right (previous page)
-                        var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
-                        var prevPageId = getPrevPageId(currentPageId);
-                        showPage(prevPageId);
-                    }
+            document.addEventListener('touchend', function(event) {
+                touchEndX = event.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX) {
+                    // Swipe left
+                    var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
+                    var nextPageId = getNextPageId(currentPageId);
+                    showPage(nextPageId);
+                } else if (touchEndX > touchStartX) {
+                    // Swipe right
+                    var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
+                    var prevPageId = getPrevPageId(currentPageId);
+                    showPage(prevPageId);
                 }
-            });
+            }
 
             function getNextPageId(currentId) {
                 switch (currentId) {
