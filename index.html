@@ -24,12 +24,12 @@
         
         /* Ajuste da altura da tab bar */
         .toolbar.toolbar-bottom {
-            height: 50px; /* Ajuste conforme necessário */
-            line-height: 50px; /* Centraliza o ícone verticalmente */
+            height: 40px; /* Ajuste conforme necessário */
+            line-height: 40px; /* Centraliza o ícone verticalmente */
         }
         
         .toolbar-inner {
-            padding: 0 10px;
+            padding: 0 5px;
         }
 
         /* Centralização dos títulos da navbar */
@@ -58,7 +58,7 @@
     <!-- App root element -->
     <div id="app">
         <!-- Your main view, should have "view-main" class -->
-        <div class="view view-main">
+        <div class="view view-main" data-swipe="true">
             <!-- TAB BAR -->
             <div class="toolbar toolbar-bottom">
                 <div class="toolbar-inner display-flex">
@@ -196,6 +196,10 @@
                 });
                 // Show the selected page
                 document.getElementById('page-' + pageId).classList.remove('hidden');
+                document.querySelectorAll('.tab-link').forEach(function(link) {
+                    link.classList.remove('active');
+                });
+                document.querySelector(`.tab-link[data-link=${pageId}]`).classList.add('active');
             }
 
             // Function to update the date and time
@@ -209,10 +213,7 @@
                 });
             }
 
-            // Set initial page to display
-            showPage('index');
-
-            // Call updateDateTime initially and set up interval
+            // Initial date/time update
             updateDateTime();
             timerId = setInterval(updateDateTime, 60000); // Update every minute
 
@@ -264,6 +265,9 @@
                         return 'link2';
                 }
             }
+
+            // Initialize the default page
+            showPage('index');
         });
     </script>
 </body>
