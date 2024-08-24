@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="#2196f3">
+    <!-- Your app title -->
+    <title>Template Tab</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="css/framework7-bundle.min.css">
+    <!-- CSS PERSONALIZADO PARA MENU -->
+    <link rel="stylesheet" href="css/index.css">
+    <!-- Ícones Material Design -->
+    <link rel="stylesheet" href="css/materialdesignicons.min.css">
+    <!-- Ícones do Remix Icon -->
+    <link rel="stylesheet" href="css/remixicon.css">
+    <style>
+        .hidden { display: none; }
+        .page-content img { max-width: 100%; }
+        .update-info { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <!-- App root element -->
+    <div id="app">
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- TAB BAR -->
+            <div class="toolbar toolbar-bottom">
+                <div class="toolbar-inner display-flex">
+                    <a href="#" class="tab-link link active" data-link="index" onclick="showPage('index')">
+                        <i class="ri-account-box-fill"></i>
+                        <span></span>
+                    </a>
+                    <a href="#" class="tab-link link" data-link="link2" onclick="showPage('link2')">
+                        <i class="ri-fingerprint-fill"></i>
+                        <span></span>
+                    </a>
+                    <a href="#" class="tab-link link" data-link="link3" onclick="showPage('link3')">
+                        <i class="ri-qr-code-line"></i>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Pages -->
+            <div class="pages">
+                <div id="page-index" class="page">
+                    <!-- Top Navbar -->
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left">
+                                <a href="#" class="tab-link link close-link">Fechar</a>
+                            </div>
+                            <div class="title">Frente</div>
+                            <div class="right">
+                                <a href="#" class="tab-link link">
+                                    <i class="ri-more-2-line"></i>
+                                    <span></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="navbar-divider"></div> <!-- Adiciona o traço delimitador -->
+                    </div>
+                    
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+                        <div class="update-info" id="update-info">
+                            <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 23:00
+                        </div>
+                        <div class="block" style="margin: 0;">
+                            <div class="center"><img src="images/frente.png" alt="Frente"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-link2" class="page hidden">
+                    <!-- Top Navbar -->
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left">
+                                <a href="#" class="tab-link link close-link">Fechar</a>
+                            </div>
+                            <div class="title">Verso</div>
+                            <div class="right">
+                                <a href="#" class="tab-link link">
+                                    <i class="ri-more-2-line"></i>
+                                    <span></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="navbar-divider"></div> <!-- Adiciona o traço delimitador -->
+                    </div>
+
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+                        <div class="update-info" id="update-info-link2">
+                            <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
+                        </div>
+                        <div class="block" style="margin: 0;">
+                            <div class="center"><img src="images/verso.png" alt="Verso"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-link3" class="page hidden">
+                    <!-- Top Navbar -->
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left">
+                                <a href="#" class="tab-link link close-link">Fechar</a>
+                            </div>
+                            <div class="title">QR Code</div>
+                            <div class="right">
+                                <a href="#" class="tab-link link">
+                                    <i class="ri-more-2-line"></i>
+                                    <span></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="navbar-divider"></div> <!-- Adiciona o traço delimitador -->
+                    </div>
+
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+                        <div class="update-info" id="update-info-link3">
+                            <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
+                        </div>
+                        <div class="center" style="margin-top: 0;">
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                        </div>
+                        <div class="block" style="margin: 120px 0 0 0;">
+                            <div class="center">
+                                <img src="images/qrcode.png" width="75%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Path to Framework7 Library Bundle JS -->
+    <script type="text/javascript" src="js/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="js/jquery-3.7.0.min.js"></script>
+    <!-- Roteamento do app -->
+    <script type="text/javascript" src="js/routes.js"></script>
+    <script src="cordova.js"></script>
+
+    <!-- JavaScript para alternar páginas, swipe e atualizar data e hora -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var timerId;
+
+            function showPage(pageId) {
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(function(page) {
+                    page.classList.add('hidden');
+                });
+                // Show the selected page
+                document.getElementById('page-' + pageId).classList.remove('hidden');
+            }
+
+            // Function to update the date and time
+            function updateDateTime() {
+                var now = new Date();
+                var formattedDate = now.toLocaleDateString('pt-BR');
+                var formattedTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                var updateInfos = document.querySelectorAll('.update-info');
+                updateInfos.forEach(function(updateInfo) {
+                    updateInfo.innerHTML = `<i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em ${formattedDate} às ${formattedTime}`;
+                });
+            }
+
+            // Set initial page to display
+            showPage('index');
+
+            // Call updateDateTime initially and set up interval
+            updateDateTime();
+            timerId = setInterval(updateDateTime, 60000); // 60000 milliseconds = 1 minute
+
+            // Add event listener for page change
+            document.querySelectorAll('.tab-link').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    var pageId = link.getAttribute('data-link');
+                    showPage(pageId);
+                });
+            });
+
+            // Swipe navigation
+            var view = new Framework7.View('.view-main', {
+                // Configure swipe navigation
+                swipeEnabled: true,
+                swipeHandler: function(e) {
+                    if (e.swipeDirection === 'left') {
+                        // Swipe left (next page)
+                        var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
+                        var nextPageId = getNextPageId(currentPageId);
+                        showPage(nextPageId);
+                    } else if (e.swipeDirection === 'right') {
+                        // Swipe right (previous page)
+                        var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
+                        var prevPageId = getPrevPageId(currentPageId);
+                        showPage(prevPageId);
+                    }
+                }
+            });
+
+            function getNextPageId(currentId) {
+                switch (currentId) {
+                    case 'index':
+                        return 'link2';
+                    case 'link2':
+                        return 'link3';
+                    case 'link3':
+                        return 'index';
+                }
+            }
+
+            function getPrevPageId(currentId) {
+                switch (currentId) {
+                    case 'index':
+                        return 'link3';
+                    case 'link2':
+                        return 'index';
+                    case 'link3':
+                        return 'link2';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
