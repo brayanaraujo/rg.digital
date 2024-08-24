@@ -18,10 +18,6 @@
     <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
-        .hidden { display: none; }
-        .page-content img { max-width: 100%; }
-        .update-info { margin-bottom: 10px; }
-
         /* Ajuste da altura da tab bar */
         .toolbar.toolbar-bottom {
             height: 40px; /* Ajuste conforme necessário */
@@ -30,27 +26,6 @@
 
         .toolbar-inner {
             padding: 0 5px;
-        }
-
-        /* Centralização dos títulos da navbar */
-        .navbar .title {
-            text-align: center;
-            flex: 1;
-        }
-
-        .navbar .left, .navbar .right {
-            flex: 0 0 auto;
-        }
-
-        @media (max-width: 767px) {
-            .navbar .title {
-                font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
-            }
-
-            /* Ajuste do espaço dos ícones na tab bar */
-            .toolbar-inner i {
-                font-size: 20px; /* Ajuste o tamanho do ícone conforme necessário */
-            }
         }
 
         /* Estilos para a tab bar ativa */
@@ -64,7 +39,7 @@
         }
 
         /* Estilos de transição para animação */
-        .page {
+        .page-content {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -75,27 +50,21 @@
             z-index: 1; /* Para garantir que a transição funcione */
         }
 
-        .page-hidden {
+        .page-content.hidden {
             transform: translateX(-100%);
-            z-index: 0;
         }
 
-        .page-visible {
-            transform: translateX(0);
-            z-index: 1;
-        }
-
-        .page-entering {
+        .page-content.entering {
             transform: translateX(100%);
         }
 
-        .page-exiting {
-            transform: translateX(-100%);
+        .page-content.visible {
+            transform: translateX(0);
         }
 
         /* Hide elements on page exit */
-        .page-exiting .progress-container,
-        .page-exiting img {
+        .page-content.hidden .progress-container,
+        .page-content.hidden img {
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
@@ -126,7 +95,7 @@
 
             <!-- Pages -->
             <div class="pages">
-                <div id="page-index" class="page page-visible">
+                <div id="page-index" class="page-content visible">
                     <!-- Top Navbar -->
                     <div class="navbar">
                         <div class="navbar-inner">
@@ -155,7 +124,7 @@
                     </div>
                 </div>
 
-                <div id="page-link2" class="page page-hidden">
+                <div id="page-link2" class="page-content hidden">
                     <!-- Top Navbar -->
                     <div class="navbar">
                         <div class="navbar-inner">
@@ -184,7 +153,7 @@
                     </div>
                 </div>
 
-                <div id="page-link3" class="page page-hidden">
+                <div id="page-link3" class="page-content hidden">
                     <!-- Top Navbar -->
                     <div class="navbar">
                         <div class="navbar-inner">
@@ -238,19 +207,19 @@
 
             function showPage(pageId) {
                 // Hide all pages
-                document.querySelectorAll('.page').forEach(page => {
-                    page.classList.remove('page-visible', 'page-entering', 'page-exiting');
-                    page.classList.add('page-hidden');
+                document.querySelectorAll('.page-content').forEach(page => {
+                    page.classList.remove('visible', 'entering');
+                    page.classList.add('hidden');
                 });
 
                 // Show the new page
                 var newPage = document.getElementById('page-' + pageId);
-                newPage.classList.remove('page-hidden');
-                newPage.classList.add('page-entering');
+                newPage.classList.remove('hidden');
+                newPage.classList.add('entering');
 
                 setTimeout(() => {
-                    newPage.classList.remove('page-entering');
-                    newPage.classList.add('page-visible');
+                    newPage.classList.remove('entering');
+                    newPage.classList.add('visible');
                 }, 100); // Slight delay for smooth transition
 
                 // Update active tab
@@ -290,12 +259,12 @@
             function handleSwipe() {
                 if (touchEndX < touchStartX - swipeThreshold) {
                     // Swipe left
-                    var currentPageId = document.querySelector('.page-visible').id.replace('page-', '');
+                    var currentPageId = document.querySelector('.page-content.visible').id.replace('page-', '');
                     var nextPageId = getNextPageId(currentPageId);
                     showPage(nextPageId);
                 } else if (touchEndX > touchStartX + swipeThreshold) {
                     // Swipe right
-                    var currentPageId = document.querySelector('.page-visible').id.replace('page-', '');
+                    var currentPageId = document.querySelector('.page-content.visible').id.replace('page-', '');
                     var prevPageId = getPrevPageId(currentPageId);
                     showPage(prevPageId);
                 }
@@ -325,7 +294,6 @@
 
             function handleTabClick(pageId) {
                 showPage(pageId);
-                event.preventDefault(); // Prevent default link behavior
             }
 
             // Initialize the default page
