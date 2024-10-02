@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -18,133 +18,105 @@
     <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
-        .hidden { display: none; }
-        .page-content img { max-width: 100%; }
-        .update-info { margin-bottom: 10px; }
+.hidden { display: none; }
+.page-content img { max-width: 100%; transition: opacity 0.5s; }
+.update-info { margin-bottom: 10px; }
 
-        /* Navbar fixada e responsiva */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 56px;
-            background-color: white;
-            z-index: 1000;
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 10px;
-        }
+/* Navbar fixada e responsiva */
+.navbar {
+    position: fixed; /* Fixa a navbar no topo da página */
+    top: 0; /* Ajusta a posição da navbar para o topo */
+    left: 0;
+    width: 100%;
+    height: 56px; /* Ajuste conforme o tamanho da sua navbar */
+    background-color: white; /* Ajuste conforme seu tema */
+    z-index: 1000; /* Certifica-se de que fica acima de todos os outros elementos */
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between; /* Mantém o conteúdo da esquerda e direita fixo */
+    align-items: center;
+    padding: 0 10px;
+}
 
-        /* Título absolutamente fixo no centro */
-        .navbar .title {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            height: 56px;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            font-size: 18px;
-            z-index: 1001;
-            pointer-events: none;
-            white-space: nowrap;
-        }
+/* Título absolutamente fixo no centro */
+.navbar .title {
+    position: absolute; /* Mudar de fixed para absolute */
+    top: 50%; /* Centralizar verticalmente */
+    left: 50%; /* Centralizar horizontalmente */
+    transform: translate(-50%, -50%); /* Ajustar a posição para o centro */
+    height: 56px; /* Mesma altura da navbar */
+    display: flex;
+    align-items: center; /* Centralizar verticalmente o texto dentro da div */
+    text-align: center;
+    font-size: 18px; /* Ajuste conforme necessário */
+    z-index: 1001; /* Coloca acima de tudo, inclusive do botão de fechar */
+    pointer-events: none; /* Evita que o título seja clicável */
+    white-space: nowrap;
+    transition: opacity 0.5s;
+}
 
-        /* Botão de fechar (lado esquerdo) */
-        .navbar .left, .navbar .right {
-            flex: 0 0 auto;
-            padding: 0 10px;
-            z-index: 1002;
-        }
+/* Botão de fechar (lado esquerdo) */
+.navbar .left, .navbar .right {
+    flex: 0 0 auto;
+    padding: 0 10px;
+    z-index: 1002; /* Mantém os botões acima da navbar */
+}
 
-        /* Garantindo que o botão de fechar não sobreponha o título */
-        .close-link {
-            position: relative;
-            z-index: 1002;
-        }
+/* Garantindo que o botão de fechar não sobreponha o título */
+.close-link {
+    position: relative;
+    z-index: 1002; /* Garante que o botão de fechar esteja acima da navbar */
+}
 
-        /* Ajustes para telas menores */
-        @media (max-width: 767px) {
-            .navbar .title {
-                font-size: 16px;
-            }
-            .navbar .left, .navbar .right {
-                padding: 0 5px;
-            }
-            .toolbar-inner i {
-                font-size: 20px;
-            }
-        }
+/* Ajustes para telas menores */
+@media (max-width: 767px) {
+    .navbar .title {
+        font-size: 16px; /* Ajuste para telas menores */
+    }
+    .navbar .left, .navbar .right {
+        padding: 0 5px;
+    }
+    .toolbar-inner i {
+        font-size: 20px; /* Ajuste o tamanho dos ícones conforme necessário */
+    }
+}
 
-        /* Progresso do QR Code */
-        .progress-container {
-            width: 100%;
-            background-color: #f3f3f3;
-            border-radius: 20px;
-        }
+/* Progresso do QR Code */
+.progress-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 20px;
+}
 
-        .progress-bar {
-            width: 50%; /* Exemplo de progresso */
-            height: 8px;
-            background-color: #2196f3;
-            border-radius: 20px;
-        }
+.progress-bar {
+    width: 50%; /* Exemplo de progresso */
+    height: 8px;
+    background-color: #2196f3;
+    border-radius: 20px;
+}
 
-        /* Animação de transição para as imagens */
-        @keyframes slideIn {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(0);
-            }
-        }
+.page-content img.out {
+    opacity: 0;
+}
 
-        @keyframes slideOut {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
+.page-content img.in {
+    opacity: 1;
+}
 
-        .carousel-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
+.navbar .title.out {
+    opacity: 0;
+}
 
-        .carousel-slide.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .carousel-title {
-            opacity: 0;
-            transform: translateY(100%);
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-
-        .carousel-title.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.navbar .title.in {
+    opacity: 1;
+}
     </style>
 </head>
 <body>
     <!-- App root element -->
     <div id="app">
         <!-- Your main view, should have "view-main" class -->
-        <div class="view view-main" data-swipe="true">
+        <div class="view view-main " data-swipe="true">
             <!-- TAB BAR -->
             <div class="toolbar toolbar-bottom">
                 <div class="toolbar-inner display-flex">
@@ -188,20 +160,7 @@
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 23:00
                         </div>
                         <div class="block" style="margin: 0;">
-                            <div class="center carousel">
-                                <div class="carousel-slide active" id="slide-1">
-                                    <div class="carousel-title active">Frente</div>
-                                    <img src="images/frente.png" alt="Frente">
-                                </div>
-                                <div class="carousel-slide" id="slide-2">
-                                    <div class="carousel-title">Verso</div>
-                                    <img src="images/verso.png" alt="Verso">
-                                </div>
-                                <div class="carousel-slide" id="slide-3">
-                                    <div class="carousel-title">QR Code</div>
-                                    <img src="images/qrcode.png" alt="QR Code" width="75%">
-                                </div>
-                            </div>
+                            <div class="center"><img src="images/frente.png" alt="Frente"></div>
                         </div>
                     </div>
                 </div>
@@ -254,10 +213,17 @@
                     <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="update-info" id="update-info-link3">
-                            <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 19:30
+                            <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
                         </div>
-                        <div class="block" style="margin: 0;">
-                            <div class="center"><img src="images/qrcode.png" alt="QR Code" width="75%"></div>
+                        <div class="center" style="margin-top: 20px;">
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="center">
+                                <img src="images/qrcode.png" width="75%">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -265,60 +231,133 @@
         </div>
     </div>
 
-    <!-- Script para o Framework7 e funcionalidades -->
-    <script src="js/framework7-bundle.min.js"></script>
+    <!-- Path to Framework7 Library Bundle JS -->
+    <script type="text/javascript" src="js/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    < script type="text/javascript" src="js/jquery-3.7.0.min.js"></script>
+    <!-- Roteamento do app -->
+    <script type="text/javascript" src="js/routes.js"></script>
+    <script src="cordova.js"></script>
+
+    <!-- JavaScript para alternar páginas, swipe e atualizar data e hora -->
     <script>
-        const app = new Framework7({
-            // App root element
-            root: '#app',
-            // Your routes
-            routes: [
-                {
-                    path: '/index/',
-                    url: './index.html',
-                },
-                {
-                    path: '/link2/',
-                    url: './link2.html',
-                },
-                {
-                    path: '/link3/',
-                    url: './link3.html',
-                },
-            ],
-        });
+        document.addEventListener("DOMContentLoaded", function() {
+            var timerId;
 
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const titles = document.querySelectorAll('.carousel-title');
+            function showPage(pageId) {
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(function(page) {
+                    page.classList.add('hidden');
+                });
+                // Show the selected page
+                document.getElementById('page-' + pageId).classList.remove('hidden');
+                
+                // Update tab links
+                document.querySelectorAll('.tab-link').forEach(function(link) {
+                    link.classList.remove('active');
+                });
+                document.querySelector(`.tab-link[data-link=${pageId}]`).classList.add('active');
+            }
 
-        function updateCarousel() {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active');
-                titles[index].classList.remove('active');
+            // Function to update the date and time
+            function updateDateTime() {
+                var now = new Date();
+                var formattedDate = now.toLocaleDateString('pt-BR');
+                var formattedTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                var updateInfos = document.querySelectorAll('.update-info');
+                updateInfos.forEach(function(updateInfo) {
+                    updateInfo.innerHTML = `<i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em ${formattedDate} às ${formattedTime}`;
+                });
+            }
+
+            // Initial date/time update
+            updateDateTime();
+            timerId = setInterval(updateDateTime, 60000); // Update every minute
+
+            // Handle swipe to change pages
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            document.addEventListener('touchstart', function(event) {
+                touchStartX = event.changedTouches[0].screenX;
             });
 
-            slides[currentSlide].classList.add('active');
-            titles[currentSlide].classList.add('active');
-        }
+            document.addEventListener('touchend', function(event) {
+                touchEndX = event.changedTouches[0].screenX;
+                handleSwipe();
+            });
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateCarousel();
-        }
+            function handleSwipe() {
+                if (touchEndX < touchStartX) {
+                    // Swipe left
+                    var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
+                    var nextPageId = getNextPageId(currentPageId);
+                    animateImages(currentPageId, nextPageId);
+                    showPage(nextPageId);
+                } else if (touchEndX > touchStartX) {
+                    // Swipe right
+                    var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
+                    var prevPageId = getPrevPageId(currentPageId);
+                    animateImages(currentPageId, prevPageId);
+                    showPage(prevPageId);
+                }
+            }
 
-        // Iniciar o carousel com um intervalo
-        setInterval(nextSlide, 3000);
+            function getNextPageId(currentId) {
+                switch (currentId) {
+                    case 'index':
+                        return 'link2';
+                    case 'link2':
+                        return 'link3';
+                    case 'link3':
+                        return 'index';
+                }
+            }
 
-        // Função para manipular o clique na aba
-        function handleTabClick(link) {
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.add('hidden'));
-            document.getElementById(`page-${link}`).classList.remove('hidden');
-        }
+            function getPrevPageId(currentId) {
+                switch (currentId) {
+                    case 'index':
+                        return 'link3';
+                    case 'link2':
+                        return 'index';
+                    case 'link3':
+                        return 'link2';
+                }
+            }
 
-        // Inicialização
-        updateCarousel();
+            function handleTabClick(pageId) {
+                showPage(pageId);
+                event.preventDefault(); // Prevent default link behavior
+            }
+
+            // Initialize the default page
+            showPage('index');
+
+            // Bind tab links
+            document.querySelectorAll('.tab-link').forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    var pageId = this.getAttribute('data-link');
+                    handleTabClick(pageId);
+                });
+            });
+
+            function animateImages(outPageId, inPageId) {
+                var outImage = document.querySelector(`#page-${outPageId} .page-content img`);
+                var inImage = document.querySelector(`#page-${inPageId} .page-content img`);
+                var outTitle = document.querySelector(`#page-${outPageId} .navbar .title`);
+                var inTitle = document.querySelector(`#page-${inPageId} .navbar .title`);
+                outImage.classList.add('out');
+                inImage.classList.add('in');
+                outTitle.classList.add('out');
+                inTitle.classList.add('in');
+                setTimeout(function() {
+                    outImage.classList.remove('out');
+                    inImage.classList.remove('in');
+                    outTitle.classList.remove('out');
+                    inTitle.classList.remove('in');
+                }, 500);
+            }
+        });
     </script>
 </body>
 </html>
