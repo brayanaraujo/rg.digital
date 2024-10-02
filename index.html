@@ -1,202 +1,298 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- Color theme for statusbar (Android only) -->
     <meta name="theme-color" content="#2196f3">
-    <!-- Your app title -->
     <title>RG Digital</title>
-    <!-- Path to Framework7 Library Bundle CSS -->
     <link rel="stylesheet" href="css/framework7-bundle.min.css">
-    <!-- CSS PERSONALIZADO PARA MENU -->
     <link rel="stylesheet" href="css/index.css">
-    <!-- Ícones Material Design -->
     <link rel="stylesheet" href="css/materialdesignicons.min.css">
-    <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
-.hidden { display: none; }
-.page-content img { max-width: 100%; transition: opacity 0.5s; }
-.update-info { margin-bottom: 10px; }
-
-/* Navbar fixada e responsiva */
-.navbar {
-    position: fixed; /* Fixa a navbar no topo da página */
-    top: 0; /* Ajusta a posição da navbar para o topo */
-    left: 0;
-    width: 100%;
-    height: 56px; /* Ajuste conforme o tamanho da sua navbar */
-    background-color: white; /* Ajuste conforme seu tema */
-    z-index: 1000; /* Certifica-se de que fica acima de todos os outros elementos */
-    border-bottom: 1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between; /* Mantém o conteúdo da esquerda e direita fixo */
-    align-items: center;
-    padding: 0 10px;
-}
-
-/* Título absolutamente fixo no centro */
-.navbar .title {
-    position: absolute; /* Mudar de fixed para absolute */
-    top: 50%; /* Centralizar verticalmente */
-    left: 50%; /* Centralizar horizontalmente */
-    transform: translate(-50%, -50%); /* Ajustar a posição para o centro */
-    height: 56px; /* Mesma altura da navbar */
-    display: flex;
-    align-items: center; /* Centralizar verticalmente o texto dentro da div */
-    text-align: center;
-    font-size: 18px; /* Ajuste conforme necessário */
-    z-index: 1001; /* Coloca acima de tudo, inclusive do botão de fechar */
-    pointer-events: none; /* Evita que o título seja clicável */
-    white-space: nowrap;
-}
-
-/* Botão de fechar (lado esquerdo) */
-.navbar .left, .navbar .right {
-    flex: 0 0 auto;
-    padding: 0 10px;
-    z-index: 1002; /* Mantém os botões acima da navbar */
-}
-
-/* Garantindo que o botão de fechar não sobreponha o título */
-.close-link {
-    position: relative;
-    z-index: 1002; /* Garante que o botão de fechar esteja acima da navbar */
-}
-
-/* Ajustes para telas menores */
-@media (max-width: 767px) {
-    .navbar .title {
-        font-size: 16px; /* Ajuste para telas menores */
-    }
-    .navbar .left, .navbar .right {
-        padding: 0 5px;
-    }
-    .toolbar-inner i {
-        font-size: 20px; /* Ajuste o tamanho dos ícones conforme necessário */
-    }
-}
-
-/* Progresso do QR Code */
-.progress-container {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 20px;
-}
-
-.progress-bar {
-    width: 50%; /* Exemplo de progresso */
-    height: 8px;
-    background-color: #2196f3;
-    border-radius: 20px;
-}
-
-.page-content img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: translateX(0);
-    transition: transform 0.5s;
-}
-
-.page-content img.out {
-    transform: translateX(-100%);
-}
-
-.page-content img.in {
-    transform: translateX(0);
-}
+        .hidden { display: none; }
+        .page-content img { max-width: 100%; }
+        .update-info { margin-bottom: 10px; }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 56px;
+            background-color: white;
+            z-index: 1000;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+        .navbar .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 56px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            font-size: 18px;
+            z-index: 1001;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .navbar .left, .navbar .right {
+            flex: 0 0 auto;
+            padding: 0 10px;
+            z-index: 1002;
+        }
+        @media (max-width: 767px) {
+            .navbar .title {
+                font-size: 16px;
+            }
+            .navbar .left, .navbar .right {
+                padding: 0 5px;
+            }
+            .toolbar-inner i {
+                font-size: 20px;
+            }
+        }
+        .slider {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+        .slider-images {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+        .slider-images img {
+            min-width: 100%;
+            transition: opacity 0.3s ease;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 20px;
+        }
+        .progress-bar {
+            width: 50%; /* Exemplo de progresso */
+            height: 8px;
+            background-color: #2196f3;
+            border-radius: 20px;
+        }
     </style>
 </head>
 <body>
-    <!-- App root element -->
     <div id="app">
-        <!-- Your main view, should have "view-main" class -->
-        <div class="view view-main">
-            <!-- Initial Page, "data-name" contains page name from route -->
-            <div data-name="home" class="page">
-                <!-- Top Navbar -->
-                <div class="navbar">
-                    <div class="left">
-                        <a href="#" class="link back">
-                            <i class="icon icon-back"></i>
-                            <span class="ios-only">Voltar</span>
-                        </a>
-                    </div>
-                    <div class="title">RG Digital</div>
-                    <div class="right">
-                        <a href="#" class="link">
-                            <i class="icon icon-menu"></i>
-                        </a>
-                    </div>
+        <div class="view view-main" data-swipe="true">
+            <div class="toolbar toolbar-bottom">
+                <div class="toolbar-inner display-flex">
+                    <a href="#" class="tab-link link active" data-link="index" onclick="handleTabClick('index')">
+                        <i class="ri-account-box-fill"></i>
+                        <span></span>
+                    </a>
+                    <a href="#" class="tab-link link" data-link="link2" onclick="handleTabClick('link2')">
+                        <i class="ri-fingerprint-fill"></i>
+                        <span></span>
+                    </a>
+                    <a href="#" class="tab-link link" data-link="link3" onclick="handleTabClick('link3')">
+                        <i class="ri-qr-code-line"></i>
+                        <span></span>
+                    </a>
                 </div>
-                <!-- Toolbar -->
-                <div class="toolbar tabbar toolbar-bottom">
-                    <div class="toolbar-inner">
-                        <a href="#" class="tab-link tab-link-active">
-                            <i class="icon icon-home"></i>
-                            <span class="tabbar-label">Início</span>
-                        </a>
-                        <a href="#" class="tab-link">
-                            <i class="icon icon-camera"></i>
-                            <span class="tabbar-label">Câmera</span>
-                        </a>
-                        <a href="#" class="tab-link">
-                            <i class="icon icon-settings"></i>
-                            <span class="tabbar-label">Configurações</span>
-                        </a>
-                    </div>
-                </div>
-                <!-- Page content -->
-                <div class="page-content">
-                    <div class="block">
-                        <p>Olá, bem-vindo ao RG Digital!</p>
-                        <p>Este é um exemplo de aplicativo móvel construído com Framework7.</p>
-                    </div>
-                    <div class="block">
-                        <h2>Progresso do QR Code</h2>
-                        <div class="progress-container">
-                            <div class="progress-bar"></div>
+            </div>
+
+            <div class="pages">
+                <div id="page-index" class="page">
+                    <div class="navbar">
+                        <div class="title" id="navbar-title">Frente</div>
+                        <div class="navbar-inner">
+                            <div class="left">
+                                <a href="#" class="tab-link link close-link" onclick="handleClose()">Fechar</a>
+                            </div>
+                            <div class="right">
+                                <a href="#" class="tab-link link">
+                                    <i class="ri-more-2-line"></i>
+                                    <span></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="block">
-                        <h2>Imagens</h2>
-                        <img src="img/image1.jpg" alt="Imagem 1">
-                        <img src="img/image2.jpg" alt="Imagem 2" class="out">
+
+                    <div class="page-content">
+                        <div class="update-info" id="update-info">
+                            <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 23:00
+                        </div>
+                        <div class="block" style="margin: 0;">
+                            <div class="slider">
+                                <div class="slider-images" id="slider-images">
+                                    <img src="images/frente.png" alt="Frente">
+                                    <img src="images/verso.png" alt="Verso">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-link2" class="page hidden">
+                    <div class="navbar">
+                        <div class="title" id="navbar-title-link2">Verso</div>
+                        <div class="navbar-inner">
+                            <div class="left">
+                                <a href="#" class="tab-link link close-link" onclick="handleClose()">Fechar</a>
+                            </div>
+                            <div class="right">
+                                <a href="#" class="tab-link link">
+                                    <i class="ri-more-2-line"></i>
+                                    <span></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-content">
+                        <div class="update-info" id="update-info-link2">
+                            <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
+                        </div>
+                        <div class="block" style="margin: 0;">
+                            <div class="slider">
+                                <div class="slider-images" id="slider-images-link2">
+                                    <img src="images/verso.png" alt="Verso">
+                                    <img src="images/frente.png" alt="Frente">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-link3" class="page hidden">
+                    <div class="navbar">
+                        <div class="title" id="navbar-title-link3">QR Code</div>
+                        <div class="navbar-inner">
+                            <div class="left">
+                                <a href="#" class="tab-link link close-link" onclick="handleClose()">Fechar</a>
+                            </div>
+                            <div class="right">
+                                <a href="#" class="tab-link link">
+                                    <i class="ri-more-2-line"></i>
+                                    <span></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-content">
+                        <div class="update-info" id="update-info-link3">
+                            <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
+                        </div>
+                        <div class="center" style="margin-top: 20px;">
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="center">
+                                <img src="images/qrcode.png" width="75%">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Path to Framework7 Library Bundle JS-->
-    <script src="js/framework7-bundle.min.js"></script>
-    <!-- App JS -->
+
+    <script type="text/javascript" src="js/framework7-bundle.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="js/routes.js"></script>
+    <script src="cordova.js"></script>
+
     <script>
-        // App init
-        var app = new Framework7({
-            root: '#app',
-            theme: 'auto',
-            name: 'RG Digital',
-            id: 'com.rgdigital.app',
-            panel: {
-                swipe: 'left',
-            },
-            routes: [
-                {
-                    path: '/home/',
-                    url: './index.html',
-                    name: 'home',
-                },
-            ],
-        });
-        // Init/Create left panel
-        var mainView = app.views.create('.view-main', {
-            url: './index.html',
+        document.addEventListener("DOMContentLoaded", function() {
+            var timerId;
+
+            function showPage(pageId) {
+                document.querySelectorAll('.page').forEach(function(page) {
+                    page.classList.add('hidden');
+                });
+                document.getElementById('page-' + pageId).classList.remove('hidden');
+                document.querySelectorAll('.tab-link').forEach(function(link) {
+                    link.classList.remove('active');
+                });
+                document.querySelector(`.tab-link[data-link=${pageId}]`).classList.add('active');
+                updateTitle(pageId);
+            }
+
+            function updateTitle(pageId) {
+                const titles = {
+                    'index': 'Frente',
+                    'link2': 'Verso',
+                    'link3': 'QR Code'
+                };
+                document.getElementById('navbar-title').innerText = titles[pageId];
+                document.getElementById('navbar-title-link2').innerText = titles['link2'];
+                document.getElementById('navbar-title-link3').innerText = titles['link3'];
+            }
+
+            document.querySelectorAll('.tab-link').forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    showPage(this.getAttribute('data-link'));
+                });
+            });
+
+            const sliderImages = document.getElementById('slider-images');
+            let currentIndex = 0;
+            const images = ['images/frente.png', 'images/verso.png']; // Add more image paths as needed
+
+            function showImage(index) {
+                const offset = -index * 100; // Cada imagem ocupa 100% de largura
+                sliderImages.style.transform = `translateX(${offset}%)`;
+            }
+
+            // Touch events for image slider
+            let startX = 0;
+            let endX = 0;
+
+            sliderImages.addEventListener('touchstart', (event) => {
+                startX = event.touches[0].clientX;
+            });
+
+            sliderImages.addEventListener('touchmove', (event) => {
+                endX = event.touches[0].clientX;
+            });
+
+            sliderImages.addEventListener('touchend', () => {
+                if (startX > endX + 50) { // Swipe left
+                    if (currentIndex < images.length - 1) {
+                        currentIndex++;
+                        showImage(currentIndex);
+                    }
+                } else if (startX < endX - 50) { // Swipe right
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        showImage(currentIndex);
+                    }
+                }
+            });
+
+            // Handle tab clicks for image changes
+            window.handleTabClick = function(pageId) {
+                if (pageId === 'link2') {
+                    currentIndex = 0; // Reset to first image for the verso tab
+                    showImage(currentIndex);
+                } else if (pageId === 'link3') {
+                    // Reset logic for QR Code page if necessary
+                }
+                showPage(pageId);
+            };
+
+            window.handleClose = function() {
+                // Logic for closing the current tab or page
+            };
         });
     </script>
 </body>
