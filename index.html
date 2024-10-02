@@ -1,124 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- Color theme for statusbar (Android only) -->
     <meta name="theme-color" content="#2196f3">
-    <!-- Your app title -->
     <title>RG Digital</title>
-    <!-- Path to Framework7 Library Bundle CSS -->
     <link rel="stylesheet" href="css/framework7-bundle.min.css">
-    <!-- CSS PERSONALIZADO PARA MENU -->
     <link rel="stylesheet" href="css/index.css">
-    <!-- Ícones Material Design -->
     <link rel="stylesheet" href="css/materialdesignicons.min.css">
-    <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
-.hidden { 
-    display: none; 
-}
+        .hidden { 
+            display: none; 
+        }
 
-.page-content img { 
-    max-width: 100%; 
-}
+        .page-content img { 
+            max-width: 100%; 
+        }
 
-.update-info { 
-    margin-bottom: 10px; 
-}
+        .update-info { 
+            margin-bottom: 10px; 
+        }
 
-/* Ajuste da altura da tab bar */
-.toolbar.toolbar-bottom {
-    height: 5vh; /* Altura proporcional à viewport */
-    line-height: 5vh; /* Centraliza o ícone verticalmente */
-    margin-bottom: 2vh; /* Margem inferior para subir a barra */
-    padding-bottom: env(safe-area-inset-bottom, 1rem); /* Segurança para notch */
-    position: fixed; /* Fixa a barra na parte inferior */
-    bottom: 0; /* Fica sempre na parte inferior */
-    left: 0; /* Alinha à esquerda */
-    right: 0; /* Alinha à direita */
-    background-color: white; /* Fundo branco para melhor contraste */
-    z-index: 10; /* Garante que fique acima de outros elementos */
-    overflow: hidden; /* Evita overflow indesejado */
-}
+        .toolbar.toolbar-bottom {
+            height: 5vh; 
+            line-height: 5vh; 
+            margin-bottom: 2vh; 
+            padding-bottom: env(safe-area-inset-bottom, 1rem); 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background-color: white; 
+            z-index: 10; 
+            overflow: hidden; 
+        }
 
-.toolbar-inner {
-    display: flex; /* Usar flexbox */
-    justify-content: space-around; /* Espaçamento uniforme entre os elementos */
-    align-items: center; /* Alinha os itens verticalmente */
-    padding: 0 1rem; /* Ajuste de padding para melhor espaçamento */
-}
+        .toolbar-inner {
+            display: flex; 
+            justify-content: space-around; 
+            align-items: center; 
+            padding: 0 1rem; 
+        }
 
-/* Ajuste do tamanho dos ícones da tab bar */
-.toolbar-inner a {
-    flex-grow: 1; /* Permite que os links ocupem o espaço disponível */
-    text-align: center; /* Centraliza o texto dentro do link */
-}
+        .toolbar-inner a {
+            flex-grow: 1; 
+            text-align: center; 
+        }
 
-/* Centralização dos títulos da navbar */
-.navbar {
-    position: fixed; /* Fixa a navbar no topo */
-    top: 0; /* Fica sempre no topo */
-    left: 0; /* Alinha à esquerda */
-    right: 0; /* Alinha à direita */
-    z-index: 20; /* Garante que fique acima de outros elementos */
-}
+        .navbar {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 20; 
+            background: white; /* Cor de fundo para melhor contraste */
+        }
 
-.navbar .title {
-    text-align: center;
-    flex-grow: 1; /* Permite que o título ocupe o espaço disponível */
-    font-size: 2.5vw; /* Tamanho de fonte proporcional */
-}
+        .navbar .title {
+            text-align: center;
+            font-size: 2.5vw; 
+        }
 
-.navbar .left, .navbar .right {
-    flex: 0 0 auto;
-    font-size: 2vw; /* Tamanho de fonte proporcional para os links */
-}
+        .navbar .left, .navbar .right {
+            flex: 0 0 auto;
+            font-size: 2vw; 
+        }
 
-/* Ajustando as configurações para tela cheia */
-@media (display-mode: fullscreen) {
-    .navbar, .toolbar.toolbar-bottom {
-        display: flex; /* Garante que permaneçam visíveis */
-    }
-}
+        .page {
+            padding-top: 50px; /* Espaço para a navbar */
+            padding-bottom: 70px; /* Espaço para a tab bar */
+        }
 
-@media (max-width: 767px) {
-    .navbar .title {
-        font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
-    }
+        @media (max-width: 767px) {
+            .navbar .title {
+                font-size: 16px; 
+            }
+            .toolbar-inner i {
+                font-size: 24px; 
+            }
+        }
 
-    /* Ajuste do espaço dos ícones na tab bar */
-    .toolbar-inner i {
-        font-size: 24px; /* Aumenta o tamanho do ícone */
-    }
-}
+        .tab-link.active {
+            color: #2196f3; 
+        }
 
-/* Estilos para a tab bar ativa */
-.tab-link.active {
-    color: #2196f3; /* Cor do link ativo */
-}
-
-/* Ajuste da margem superior da imagem do QR Code */
-#page-link3 .block {
-    margin-top: 20px; /* Ajuste conforme necessário */
-}
-
-/* Adicionando padding inferior nas páginas */
-.page-content {
-    padding-bottom: 70px; /* Para garantir que o conteúdo não fique sobre a barra */
-}
-
-</style>
+        #page-link3 .block {
+            margin-top: 20px; 
+        }
+    </style>
 </head>
 <body>
-    <!-- App root element -->
     <div id="app">
-        <!-- Your main view, should have "view-main" class -->
         <div class="view view-main" data-swipe="true">
-            <!-- TAB BAR -->
             <div class="toolbar toolbar-bottom">
                 <div class="toolbar-inner display-flex">
                     <a href="#" class="tab-link link active" data-link="index" onclick="handleTabClick('index')">
@@ -136,10 +111,8 @@
                 </div>
             </div>
 
-            <!-- Pages -->
             <div class="pages">
                 <div id="page-index" class="page">
-                    <!-- Top Navbar -->
                     <div class="navbar">
                         <div class="navbar-inner">
                             <div class="left">
@@ -153,10 +126,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="navbar-divider"></div> <!-- Adiciona o traço delimitador -->
+                        <div class="navbar-divider"></div>
                     </div>
-
-                    <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="update-info" id="update-info">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 23:00
@@ -168,7 +139,6 @@
                 </div>
 
                 <div id="page-link2" class="page hidden">
-                    <!-- Top Navbar -->
                     <div class="navbar">
                         <div class="navbar-inner">
                             <div class="left">
@@ -182,10 +152,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="navbar-divider"></div> <!-- Adiciona o traço delimitador -->
+                        <div class="navbar-divider"></div>
                     </div>
-
-                    <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="update-info" id="update-info-link2">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
@@ -197,7 +165,6 @@
                 </div>
 
                 <div id="page-link3" class="page hidden">
-                    <!-- Top Navbar -->
                     <div class="navbar">
                         <div class="navbar-inner">
                             <div class="left">
@@ -211,10 +178,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="navbar-divider"></div> <!-- Adiciona o traço delimitador -->
+                        <div class="navbar-divider"></div>
                     </div>
-
-                    <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="update-info" id="update-info-link3">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
@@ -235,35 +200,27 @@
         </div>
     </div>
 
-    <!-- Path to Framework7 Library Bundle JS -->
     <script type="text/javascript" src="js/framework7-bundle.min.js"></script>
-    <!-- jQuery -->
     <script type="text/javascript" src="js/jquery-3.7.0.min.js"></script>
-    <!-- Roteamento do app -->
     <script type="text/javascript" src="js/routes.js"></script>
     <script src="cordova.js"></script>
 
-    <!-- JavaScript para alternar páginas, swipe e atualizar data e hora -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var timerId;
 
             function showPage(pageId) {
-                // Hide all pages
                 document.querySelectorAll('.page').forEach(function(page) {
                     page.classList.add('hidden');
                 });
-                // Show the selected page
                 document.getElementById('page-' + pageId).classList.remove('hidden');
                 
-                // Update tab links
                 document.querySelectorAll('.tab-link').forEach(function(link) {
                     link.classList.remove('active');
                 });
                 document.querySelector(`.tab-link[data-link=${pageId}]`).classList.add('active');
             }
 
-            // Function to update the date and time
             function updateDateTime() {
                 var now = new Date();
                 var formattedDate = now.toLocaleDateString('pt-BR');
@@ -274,11 +231,9 @@
                 });
             }
 
-            // Initial date/time update
             updateDateTime();
-            timerId = setInterval(updateDateTime, 60000); // Update every minute
+            timerId = setInterval(updateDateTime, 60000);
 
-            // Handle swipe to change pages
             let touchStartX = 0;
             let touchEndX = 0;
 
@@ -293,12 +248,10 @@
 
             function handleSwipe() {
                 if (touchEndX < touchStartX) {
-                    // Swipe left
                     var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
                     var nextPageId = getNextPageId(currentPageId);
                     showPage(nextPageId);
                 } else if (touchEndX > touchStartX) {
-                    // Swipe right
                     var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
                     var prevPageId = getPrevPageId(currentPageId);
                     showPage(prevPageId);
@@ -329,13 +282,11 @@
 
             function handleTabClick(pageId) {
                 showPage(pageId);
-                event.preventDefault(); // Prevent default link behavior
+                event.preventDefault();
             }
 
-            // Initialize the default page
             showPage('index');
 
-            // Bind tab links
             document.querySelectorAll('.tab-link').forEach(function(link) {
                 link.addEventListener('click', function(event) {
                     var pageId = this.getAttribute('data-link');
