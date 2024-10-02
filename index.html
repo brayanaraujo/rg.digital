@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -15,6 +15,8 @@
         .hidden { display: none; }
         .page-content img { max-width: 100%; }
         .update-info { margin-bottom: 10px; }
+
+        /* Navbar fixada e responsiva */
         .navbar {
             position: fixed;
             top: 0;
@@ -28,7 +30,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 10px;
+            transition: background-color 0.3s; /* Transição suave */
         }
+
+        /* Título absolutamente fixo no centro */
         .navbar .title {
             position: absolute;
             top: 50%;
@@ -43,46 +48,32 @@
             pointer-events: none;
             white-space: nowrap;
         }
-        .navbar .left, .navbar .right {
-            flex: 0 0 auto;
-            padding: 0 10px;
-            z-index: 1002;
+
+        /* Estilo para a toolbar */
+        .toolbar {
+            background-color: #2196f3; /* Cor padrão */
+            transition: background-color 0.3s; /* Transição suave */
         }
-        @media (max-width: 767px) {
-            .navbar .title {
-                font-size: 16px;
-            }
-            .navbar .left, .navbar .right {
-                padding: 0 5px;
-            }
-            .toolbar-inner i {
-                font-size: 20px;
-            }
+        .toolbar .active {
+            color: #ff5722; /* Cor do link ativo */
         }
-        .slider {
-            display: flex;
-            overflow: hidden;
-            width: 100%;
-            position: relative;
-        }
-        .slider-images {
-            display: flex;
-            transition: transform 0.3s ease;
-        }
-        .slider-images img {
-            min-width: 100%;
-            transition: opacity 0.3s ease;
-        }
+
+        /* Progresso do QR Code */
         .progress-container {
             width: 100%;
             background-color: #f3f3f3;
             border-radius: 20px;
         }
         .progress-bar {
-            width: 50%; /* Exemplo de progresso */
+            width: 50%;
             height: 8px;
             background-color: #2196f3;
             border-radius: 20px;
+        }
+
+        /* Animação de transição */
+        .page {
+            transition: opacity 0.3s ease-in-out;
         }
     </style>
 </head>
@@ -109,7 +100,7 @@
             <div class="pages">
                 <div id="page-index" class="page">
                     <div class="navbar">
-                        <div class="title" id="navbar-title">Frente</div>
+                        <div class="title" id="navbar-title-index">Frente</div>
                         <div class="navbar-inner">
                             <div class="left">
                                 <a href="#" class="tab-link link close-link" onclick="handleClose()">Fechar</a>
@@ -122,18 +113,12 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="page-content">
                         <div class="update-info" id="update-info">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 23:00
                         </div>
                         <div class="block" style="margin: 0;">
-                            <div class="slider">
-                                <div class="slider-images" id="slider-images">
-                                    <img src="images/frente.png" alt="Frente">
-                                    <img src="images/verso.png" alt="Verso">
-                                </div>
-                            </div>
+                            <div class="center"><img src="images/frente.png" alt="Frente"></div>
                         </div>
                     </div>
                 </div>
@@ -153,18 +138,12 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="page-content">
                         <div class="update-info" id="update-info-link2">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
                         </div>
                         <div class="block" style="margin: 0;">
-                            <div class="slider">
-                                <div class="slider-images" id="slider-images-link2">
-                                    <img src="images/verso.png" alt="Verso">
-                                    <img src="images/frente.png" alt="Frente">
-                                </div>
-                            </div>
+                            <div class="center"><img src="images/verso.png" alt="Verso"></div>
                         </div>
                     </div>
                 </div>
@@ -184,7 +163,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="page-content">
                         <div class="update-info" id="update-info-link3">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
@@ -215,84 +193,55 @@
             var timerId;
 
             function showPage(pageId) {
+                // Hide all pages with fade-out effect
                 document.querySelectorAll('.page').forEach(function(page) {
-                    page.classList.add('hidden');
+                    page.style.opacity = '0'; // Fade out
+                    setTimeout(() => {
+                        page.classList.add('hidden');
+                    }, 300); // Tempo da animação
                 });
-                document.getElementById('page-' + pageId).classList.remove('hidden');
+
+                // Show the selected page with fade-in effect
+                var activePage = document.getElementById('page-' + pageId);
+                activePage.classList.remove('hidden');
+                setTimeout(() => {
+                    activePage.style.opacity = '1'; // Fade in
+                }, 0);
+
+                // Update tab links and toolbar colors
                 document.querySelectorAll('.tab-link').forEach(function(link) {
                     link.classList.remove('active');
+                    link.style.color = ''; // Reseta a cor
                 });
-                document.querySelector(`.tab-link[data-link=${pageId}]`).classList.add('active');
+
+                var activeLink = document.querySelector(`.tab-link[data-link=${pageId}]`);
+                activeLink.classList.add('active');
+                activeLink.style.color = '#ff5722'; // Cor do link ativo
+
+                // Atualiza o título da navbar
                 updateTitle(pageId);
             }
 
             function updateTitle(pageId) {
                 const titles = {
                     'index': 'Frente',
+                    'link2
                     'link2': 'Verso',
-                    'link3': 'QR Code'
+                    'link3': 'QR Code',
                 };
-                document.getElementById('navbar-title').innerText = titles[pageId];
-                document.getElementById('navbar-title-link2').innerText = titles['link2'];
-                document.getElementById('navbar-title-link3').innerText = titles['link3'];
+                document.querySelector('.navbar .title').textContent = titles[pageId];
             }
 
-            document.querySelectorAll('.tab-link').forEach(function(link) {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    showPage(this.getAttribute('data-link'));
-                });
-            });
-
-            const sliderImages = document.getElementById('slider-images');
-            let currentIndex = 0;
-            const images = ['images/frente.png', 'images/verso.png']; // Add more image paths as needed
-
-            function showImage(index) {
-                const offset = -index * 100; // Cada imagem ocupa 100% de largura
-                sliderImages.style.transform = `translateX(${offset}%)`;
-            }
-
-            // Touch events for image slider
-            let startX = 0;
-            let endX = 0;
-
-            sliderImages.addEventListener('touchstart', (event) => {
-                startX = event.touches[0].clientX;
-            });
-
-            sliderImages.addEventListener('touchmove', (event) => {
-                endX = event.touches[0].clientX;
-            });
-
-            sliderImages.addEventListener('touchend', () => {
-                if (startX > endX + 50) { // Swipe left
-                    if (currentIndex < images.length - 1) {
-                        currentIndex++;
-                        showImage(currentIndex);
-                    }
-                } else if (startX < endX - 50) { // Swipe right
-                    if (currentIndex > 0) {
-                        currentIndex--;
-                        showImage(currentIndex);
-                    }
-                }
-            });
-
-            // Handle tab clicks for image changes
             window.handleTabClick = function(pageId) {
-                if (pageId === 'link2') {
-                    currentIndex = 0; // Reset to first image for the verso tab
-                    showImage(currentIndex);
-                } else if (pageId === 'link3') {
-                    // Reset logic for QR Code page if necessary
-                }
                 showPage(pageId);
             };
 
             window.handleClose = function() {
-                // Logic for closing the current tab or page
+                // Adicione aqui a lógica para fechar a página ou voltar
             };
+
+            // Exibir a página inicial por padrão
+            showPage('index');
         });
     </script>
 </body>
