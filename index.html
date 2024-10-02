@@ -18,50 +18,111 @@
     <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
-        .hidden { display: none; }
-        .page-content img { max-width: 100%; }
-        .update-info { margin-bottom: 10px; }
+     .hidden { 
+    display: none; 
+}
 
-        /* Ajuste da altura da tab bar */
-        .toolbar.toolbar-bottom {
-            height: 40px; /* Ajuste conforme necessário */
-            line-height: 40px; /* Centraliza o ícone verticalmente */
-        }
+.page-content img { 
+    max-width: 100%; 
+    height: auto; /* Responsividade das imagens */ 
+}
 
-        .toolbar-inner {
-            padding: 0 5px;
-        }
+.update-info { 
+    margin-bottom: 10px; 
+}
 
-        /* Centralização dos títulos da navbar */
-        .navbar .title {
-            text-align: center;
-            flex: 1;
-        }
+/* Ajuste da altura da tab bar */
+.toolbar.toolbar-bottom {
+    height: 40px; /* Ajuste conforme necessário */
+    line-height: 40px; /* Centraliza o ícone verticalmente */
+}
 
-        .navbar .left, .navbar .right {
-            flex: 0 0 auto;
-        }
+.toolbar-inner {
+    padding: 0 5px;
+}
 
-        @media (max-width: 767px) {
-            .navbar .title {
-                font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
-            }
+/* Centralização dos títulos da navbar */
+.navbar-inner {
+    display: flex;
+    justify-content: space-between; /* Alinha os itens dos dois lados */
+    align-items: center; /* Alinha verticalmente os itens */
+}
 
-            /* Ajuste do espaço dos ícones na tab bar */
-            .toolbar-inner i {
-                font-size: 20px; /* Ajuste o tamanho do ícone conforme necessário */
-            }
-        }
+.navbar .title {
+    flex: 1;
+    text-align: center;
+    font-size: 18px; /* Ajuste conforme necessário */
+}
 
-        /* Estilos para a tab bar ativa */
-        .tab-link.active {
-            color: #2196f3; /* Cor do link ativo */
-        }
+.navbar .left, 
+.navbar .right {
+    flex: 0 0 auto;
+    padding: 0 10px;
+}
 
-        /* Ajuste da margem superior da imagem do QR Code */
-        #page-link3 .block {
-            margin-top: 20px; /* Ajuste conforme necessário */
-        }
+/* Botão Fechar */
+.close-link {
+    padding: 0 10px;
+}
+
+@media (max-width: 767px) {
+    .navbar .title {
+        font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
+    }
+
+    .navbar .left, 
+    .navbar .right {
+        padding: 0 5px;
+    }
+
+    /* Ajuste do espaço dos ícones na tab bar */
+    .toolbar-inner i {
+        font-size: 20px; /* Ajuste o tamanho do ícone conforme necessário */
+    }
+}
+
+/* Estilos para a tab bar ativa */
+.tab-link.active {
+    color: #2196f3; /* Cor do link ativo */
+}
+
+/* Ajuste da margem superior da imagem do QR Code */
+#page-link3 .block {
+    margin-top: 20px; /* Ajuste conforme necessário */
+}
+
+.page-content img {
+    max-width: 100%;
+    height: auto; /* Responsividade das imagens */
+}
+
+/* Centraliza o conteúdo */
+.center {
+    text-align: center;
+}
+
+/* Estilo para o traço da navbar */
+.navbar-divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Progress bar no QR Code */
+.progress-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    height: 8px;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    width: 50%;
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 10px;
+}
     </style>
 </head>
 <body>
