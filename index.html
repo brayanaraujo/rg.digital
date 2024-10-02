@@ -18,78 +18,66 @@
     <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
- .hidden { display: none; }
+.hidden { display: none; }
 .page-content img { max-width: 100%; }
 .update-info { margin-bottom: 10px; }
 
-/* Ajuste da altura da tab bar */
-.toolbar.toolbar-bottom {
-    height: 40px; /* Ajuste conforme necessário */
-    line-height: 40px; /* Centraliza o ícone verticalmente */
-}
-
-.toolbar-inner {
-    padding: 0 5px;
-}
-
-/* Centralização dos títulos da navbar */
+/* Navbar fixada e responsiva */
 .navbar {
-    position: relative;
+    position: fixed; /* Fixa a navbar no topo da página */
+    top: 0; /* Alinha no topo */
+    left: 0;
+    width: 100%;
+    height: 56px; /* Ajuste conforme o tamanho da sua navbar */
+    background-color: white; /* Ajuste conforme seu tema */
+    z-index: 1000; /* Certifica-se de que fica acima de todos os outros elementos */
+    border-bottom: 1px solid #e0e0e0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Mantém o conteúdo da esquerda e direita fixo */
     align-items: center;
     padding: 0 10px;
-    height: 56px; /* Ajuste conforme necessário */
-    background-color: white; /* Ajuste conforme o estilo do seu tema */
-    border-bottom: 1px solid #e0e0e0; /* Linha inferior para destaque */
-    z-index: 1000; /* Mantém a navbar no topo */
-    width: 100%;
 }
 
+/* Título absolutamente fixo no centro */
 .navbar .title {
-    position: absolute;
+    position: fixed; /* Garante que o título fique fixo na tela */
+    top: 0;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); /* Centraliza horizontalmente */
+    height: 56px; /* Mesma altura da navbar */
+    display: flex;
+    align-items: center; /* Centraliza verticalmente o texto dentro da div */
     text-align: center;
-    white-space: nowrap;
     font-size: 18px; /* Ajuste conforme necessário */
-    pointer-events: none; /* Garante que o clique no título não afete */
+    z-index: 1001; /* Coloca acima de tudo, inclusive do botão de fechar */
+    pointer-events: none; /* Evita que o título seja clicável */
+    white-space: nowrap;
 }
 
+/* Botão de fechar (lado esquerdo) */
 .navbar .left, .navbar .right {
     flex: 0 0 auto;
     padding: 0 10px;
+    z-index: 1002; /* Mantém os botões acima da navbar */
 }
 
+/* Garantindo que o botão de fechar não sobreponha o título */
 .close-link {
     position: relative;
-    z-index: 1; /* Certifica-se de que o botão não será sobreposto pelo título */
+    z-index: 1002; /* Garante que o botão de fechar esteja acima da navbar */
 }
 
 /* Ajustes para telas menores */
 @media (max-width: 767px) {
     .navbar .title {
-        font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
-         position: fixed;
+        font-size: 16px; /* Ajuste para telas menores */
     }
-
     .navbar .left, .navbar .right {
-    
+        padding: 0 5px;
     }
-
     .toolbar-inner i {
         font-size: 20px; /* Ajuste o tamanho dos ícones conforme necessário */
     }
-}
-
-/* Estilos para a tab bar ativa */
-.tab-link.active {
-    color: #2196f3; /* Cor do link ativo */
-}
-
-/* Ajuste da margem superior da imagem do QR Code */
-#page-link3 .block {
-    margin-top: 20px; /* Ajuste conforme necessário */
 }
 
 /* Progresso do QR Code */
@@ -105,7 +93,6 @@
     background-color: #2196f3;
     border-radius: 20px;
 }
-
     </style>
 </head>
 <body>
