@@ -18,51 +18,59 @@
     <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
-        .hidden { display: none; }
-        .page-content img { max-width: 100%; }
-        .update-info { margin-bottom: 10px; }
+    .hidden { display: none; }
+    .page-content img { max-width: 100%; }
+    .update-info { margin-bottom: 10px; }
 
-        /* Ajuste da altura da tab bar */
-        .toolbar.toolbar-bottom {
-            height: 40px; /* Ajuste conforme necessário */
-            line-height: 40px; /* Centraliza o ícone verticalmente */
-        }
+    /* Ajuste da altura da tab bar */
+    .toolbar.toolbar-bottom {
+        height: 50px; /* Ajuste conforme necessário */
+        line-height: 50px; /* Centraliza o ícone verticalmente */
+        padding-bottom: env(safe-area-inset-bottom, 10px); /* Adiciona segurança para dispositivos com notch */
+        position: relative; /* Para evitar sobreposição */
+    }
 
-        .toolbar-inner {
-            padding: 0 5px;
-        }
+    .toolbar-inner {
+        padding: 0 5px;
+    }
 
-        /* Centralização dos títulos da navbar */
+    /* Centralização dos títulos da navbar */
+    .navbar .title {
+        text-align: center;
+        flex: 1;
+    }
+
+    .navbar .left, .navbar .right {
+        flex: 0 0 auto;
+    }
+
+    @media (max-width: 767px) {
         .navbar .title {
-            text-align: center;
-            flex: 1;
+            font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
         }
 
-        .navbar .left, .navbar .right {
-            flex: 0 0 auto;
+        /* Ajuste do espaço dos ícones na tab bar */
+        .toolbar-inner i {
+            font-size: 24px; /* Aumenta o tamanho do ícone */
         }
+    }
 
-        @media (max-width: 767px) {
-            .navbar .title {
-                font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
-            }
+    /* Estilos para a tab bar ativa */
+    .tab-link.active {
+        color: #2196f3; /* Cor do link ativo */
+    }
 
-            /* Ajuste do espaço dos ícones na tab bar */
-            .toolbar-inner i {
-                font-size: 20px; /* Ajuste o tamanho do ícone conforme necessário */
-            }
-        }
+    /* Ajuste da margem superior da imagem do QR Code */
+    #page-link3 .block {
+        margin-top: 20px; /* Ajuste conforme necessário */
+    }
 
-        /* Estilos para a tab bar ativa */
-        .tab-link.active {
-            color: #2196f3; /* Cor do link ativo */
-        }
+    /* Adicionando padding inferior nas páginas */
+    .page-content {
+        padding-bottom: 60px; /* Para garantir que o conteúdo não fique sobre a barra */
+    }
+</style>
 
-        /* Ajuste da margem superior da imagem do QR Code */
-        #page-link3 .block {
-            margin-top: 20px; /* Ajuste conforme necessário */
-        }
-    </style>
 </head>
 <body>
     <!-- App root element -->
