@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
         .hidden { display: none; }
-        .page-content { overflow-x: hidden; overflow-y: hidden; position: relative; }
+        .page-content { overflow: hidden; }
         .scroll-images { display: flex; transition: transform 0.5s ease; }
-        .scroll-images img { max-width: 100%; }
+        .scroll-images img { min-width: 100%; height: auto; }
 
         /* Navbar fixada e responsiva */
         .navbar {
@@ -85,7 +85,7 @@
                         </div>
                         <div class="scroll-images" id="scroll-images">
                             <img src="images/frente.png" alt="Frente">
-                            <img src="images/verso.png" alt="Verso" class="hidden">
+                            <img src="images/verso.png" alt="Verso">
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                         </div>
                         <div class="scroll-images" id="scroll-images-link2">
                             <img src="images/verso.png" alt="Verso">
-                            <img src="images/frente.png" alt="Frente" class="hidden">
+                            <img src="images/frente.png" alt="Frente">
                         </div>
                     </div>
                 </div>
@@ -141,11 +141,9 @@
         document.addEventListener("DOMContentLoaded", function() {
             let currentIndex = 0; // índice atual da imagem
             const images = document.querySelectorAll('.scroll-images img');
+            const totalImages = images.length;
 
             function updateImages() {
-                images.forEach((img, index) => {
-                    img.classList.toggle('hidden', index !== currentIndex);
-                });
                 const scrollContainer = images[0].parentElement;
                 scrollContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
             }
@@ -165,10 +163,10 @@
             function handleSwipe() {
                 if (touchEndX < touchStartX) {
                     // Swipe left
-                    currentIndex = (currentIndex + 1) % images.length;
+                    currentIndex = (currentIndex + 1) % totalImages;
                 } else if (touchEndX > touchStartX) {
                     // Swipe right
-                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
                 }
                 updateImages();
             }
