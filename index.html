@@ -18,18 +18,9 @@
     <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
-     .hidden { 
-    display: none; 
-}
-
-.page-content img { 
-    max-width: 100%; 
-    height: auto; /* Responsividade das imagens */ 
-}
-
-.update-info { 
-    margin-bottom: 10px; 
-}
+ .hidden { display: none; }
+.page-content img { max-width: 100%; }
+.update-info { margin-bottom: 10px; }
 
 /* Ajuste da altura da tab bar */
 .toolbar.toolbar-bottom {
@@ -42,42 +33,51 @@
 }
 
 /* Centralização dos títulos da navbar */
-.navbar-inner {
+.navbar {
+    position: relative;
     display: flex;
-    justify-content: space-between; /* Alinha os itens dos dois lados */
-    align-items: center; /* Alinha verticalmente os itens */
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    height: 56px; /* Ajuste conforme necessário */
+    background-color: white; /* Ajuste conforme o estilo do seu tema */
+    border-bottom: 1px solid #e0e0e0; /* Linha inferior para destaque */
+    z-index: 1000; /* Mantém a navbar no topo */
+    width: 100%;
 }
 
 .navbar .title {
-    flex: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
+    white-space: nowrap;
     font-size: 18px; /* Ajuste conforme necessário */
+    pointer-events: none; /* Garante que o clique no título não afete */
 }
 
-.navbar .left, 
-.navbar .right {
+.navbar .left, .navbar .right {
     flex: 0 0 auto;
     padding: 0 10px;
 }
 
-/* Botão Fechar */
 .close-link {
-    padding: 0 10px;
+    position: relative;
+    z-index: 1; /* Certifica-se de que o botão não será sobreposto pelo título */
 }
 
+/* Ajustes para telas menores */
 @media (max-width: 767px) {
     .navbar .title {
         font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
     }
 
-    .navbar .left, 
-    .navbar .right {
+    .navbar .left, .navbar .right {
         padding: 0 5px;
     }
 
-    /* Ajuste do espaço dos ícones na tab bar */
     .toolbar-inner i {
-        font-size: 20px; /* Ajuste o tamanho do ícone conforme necessário */
+        font-size: 20px; /* Ajuste o tamanho dos ícones conforme necessário */
     }
 }
 
@@ -91,38 +91,20 @@
     margin-top: 20px; /* Ajuste conforme necessário */
 }
 
-.page-content img {
-    max-width: 100%;
-    height: auto; /* Responsividade das imagens */
-}
-
-/* Centraliza o conteúdo */
-.center {
-    text-align: center;
-}
-
-/* Estilo para o traço da navbar */
-.navbar-divider {
-    height: 1px;
-    background-color: #e0e0e0;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-/* Progress bar no QR Code */
+/* Progresso do QR Code */
 .progress-container {
     width: 100%;
     background-color: #f3f3f3;
-    height: 8px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .progress-bar {
-    width: 50%;
-    height: 100%;
-    background-color: #4caf50;
-    border-radius: 10px;
+    width: 50%; /* Exemplo de progresso */
+    height: 8px;
+    background-color: #2196f3;
+    border-radius: 20px;
 }
+
     </style>
 </head>
 <body>
