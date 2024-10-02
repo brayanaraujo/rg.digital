@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
     <meta name="theme-color" content="#2196f3">
+    <!-- Your app title -->
     <title>RG Digital</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
     <link rel="stylesheet" href="css/framework7-bundle.min.css">
+    <!-- CSS PERSONALIZADO PARA MENU -->
     <link rel="stylesheet" href="css/index.css">
+    <!-- Ícones Material Design -->
     <link rel="stylesheet" href="css/materialdesignicons.min.css">
+    <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
         .hidden { display: none; }
@@ -18,44 +24,60 @@
 
         /* Navbar fixada e responsiva */
         .navbar {
-            position: fixed;
-            top: 0;
+            position: fixed; /* Fixa a navbar no topo da página */
+            top: 0; /* Ajusta a posição da navbar para o topo */
             left: 0;
             width: 100%;
-            height: 56px;
-            background-color: white;
-            z-index: 1000;
+            height: 56px; /* Ajuste conforme o tamanho da sua navbar */
+            background-color: white; /* Ajuste conforme seu tema */
+            z-index: 1000; /* Certifica-se de que fica acima de todos os outros elementos */
             border-bottom: 1px solid #e0e0e0;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Mantém o conteúdo da esquerda e direita fixo */
             align-items: center;
             padding: 0 10px;
-            transition: background-color 0.3s; /* Transição suave */
         }
 
         /* Título absolutamente fixo no centro */
         .navbar .title {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            height: 56px;
+            position: absolute; /* Mudar de fixed para absolute */
+            top: 50%; /* Centralizar verticalmente */
+            left: 50%; /* Centralizar horizontalmente */
+            transform: translate(-50%, -50%); /* Ajustar a posição para o centro */
+            height: 56px; /* Mesma altura da navbar */
             display: flex;
-            align-items: center;
+            align-items: center; /* Centralizar verticalmente o texto dentro da div */
             text-align: center;
-            font-size: 18px;
-            z-index: 1001;
-            pointer-events: none;
+            font-size: 18px; /* Ajuste conforme necessário */
+            z-index: 1001; /* Coloca acima de tudo, inclusive do botão de fechar */
+            pointer-events: none; /* Evita que o título seja clicável */
             white-space: nowrap;
         }
 
-        /* Estilo para a toolbar */
-        .toolbar {
-            background-color: #2196f3; /* Cor padrão */
-            transition: background-color 0.3s; /* Transição suave */
+        /* Botão de fechar (lado esquerdo) */
+        .navbar .left, .navbar .right {
+            flex: 0 0 auto;
+            padding: 0 10px;
+            z-index: 1002; /* Mantém os botões acima da navbar */
         }
-        .toolbar .active {
-            color: #ff5722; /* Cor do link ativo */
+
+        /* Garantindo que o botão de fechar não sobreponha o título */
+        .close-link {
+            position: relative;
+            z-index: 1002; /* Garante que o botão de fechar esteja acima da navbar */
+        }
+
+        /* Ajustes para telas menores */
+        @media (max-width: 767px) {
+            .navbar .title {
+                font-size: 16px; /* Ajuste para telas menores */
+            }
+            .navbar .left, .navbar .right {
+                padding: 0 5px;
+            }
+            .toolbar-inner i {
+                font-size: 20px; /* Ajuste o tamanho dos ícones conforme necessário */
+            }
         }
 
         /* Progresso do QR Code */
@@ -64,22 +86,21 @@
             background-color: #f3f3f3;
             border-radius: 20px;
         }
+
         .progress-bar {
-            width: 50%;
+            width: 50%; /* Exemplo de progresso */
             height: 8px;
             background-color: #2196f3;
             border-radius: 20px;
         }
-
-        /* Animação de transição */
-        .page {
-            transition: opacity 0.3s ease-in-out;
-        }
     </style>
 </head>
 <body>
+    <!-- App root element -->
     <div id="app">
+        <!-- Your main view, should have "view-main" class -->
         <div class="view view-main" data-swipe="true">
+            <!-- TAB BAR -->
             <div class="toolbar toolbar-bottom">
                 <div class="toolbar-inner display-flex">
                     <a href="#" class="tab-link link active" data-link="index" onclick="handleTabClick('index')">
@@ -97,10 +118,12 @@
                 </div>
             </div>
 
+            <!-- Pages -->
             <div class="pages">
                 <div id="page-index" class="page">
+                    <!-- Top Navbar -->
                     <div class="navbar">
-                        <div class="title" id="navbar-title-index">Frente</div>
+                        <div class="title">Frente</div>
                         <div class="navbar-inner">
                             <div class="left">
                                 <a href="#" class="tab-link link close-link" onclick="handleClose()">Fechar</a>
@@ -113,6 +136,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="update-info" id="update-info">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 23:00
@@ -124,8 +149,9 @@
                 </div>
 
                 <div id="page-link2" class="page hidden">
+                    <!-- Top Navbar -->
                     <div class="navbar">
-                        <div class="title" id="navbar-title-link2">Verso</div>
+                        <div class="title">Verso</div>
                         <div class="navbar-inner">
                             <div class="left">
                                 <a href="#" class="tab-link link close-link" onclick="handleClose()">Fechar</a>
@@ -138,6 +164,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="update-info" id="update-info-link2">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
@@ -149,8 +177,9 @@
                 </div>
 
                 <div id="page-link3" class="page hidden">
+                    <!-- Top Navbar -->
                     <div class="navbar">
-                        <div class="title" id="navbar-title-link3">QR Code</div>
+                        <div class="title">QR Code</div>
                         <div class="navbar-inner">
                             <div class="left">
                                 <a href="#" class="tab-link link close-link" onclick="handleClose()">Fechar</a>
@@ -163,6 +192,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="update-info" id="update-info-link3">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
@@ -172,7 +203,7 @@
                                 <div class="progress-bar"></div>
                             </div>
                         </div>
-                        <div class="block">
+                        <div class="block" id="qr-code-container">
                             <div class="center">
                                 <img src="images/qrcode.png" width="75%">
                             </div>
@@ -183,53 +214,40 @@
         </div>
     </div>
 
+    <!-- Path to Framework7 Library Bundle JS -->
     <script type="text/javascript" src="js/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
     <script type="text/javascript" src="js/jquery-3.7.0.min.js"></script>
-    <script type="text/javascript" src="js/routes.js"></script>
-    <script src="cordova.js"></script>
-
+    <!-- Roteamento -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var timerId;
+        $(document).ready(function() {
+            let currentPage = 'index';
 
             function showPage(pageId) {
-                // Hide all pages with fade-out effect
-                document.querySelectorAll('.page').forEach(function(page) {
-                    page.style.opacity = '0'; // Fade out
-                    setTimeout(() => {
-                        page.classList.add('hidden');
-                    }, 300); // Tempo da animação
-                });
-
-                // Show the selected page with fade-in effect
-                var activePage = document.getElementById('page-' + pageId);
-                activePage.classList.remove('hidden');
-                setTimeout(() => {
-                    activePage.style.opacity = '1'; // Fade in
-                }, 0);
-
-                // Update tab links and toolbar colors
-                document.querySelectorAll('.tab-link').forEach(function(link) {
-                    link.classList.remove('active');
-                    link.style.color = ''; // Reseta a cor
-                });
-
-                var activeLink = document.querySelector(`.tab-link[data-link=${pageId}]`);
-                activeLink.classList.add('active');
-                activeLink.style.color = '#ff5722'; // Cor do link ativo
-
-                // Atualiza o título da navbar
-                updateTitle(pageId);
+                if (currentPage !== pageId) {
+                    // Oculta a página atual com animação
+                    const currentPageElement = $('#page-' + currentPage);
+                    currentPageElement.css('opacity', '1');
+                    currentPageElement.animate({ opacity: 0 }, 300, function() {
+                        currentPageElement.addClass('hidden'); // Oculta a página após a animação
+                        const nextPageElement = $('#page-' + pageId);
+                        nextPageElement.removeClass('hidden').css('opacity', '0').animate({ opacity: 1 }, 300); // Mostra a nova página
+                    });
+                    currentPage = pageId;
+                    updateToolbar(pageId);
+                }
             }
 
-            function updateTitle(pageId) {
+            function updateToolbar(pageId) {
+                $('.tab-link').removeClass('active'); // Remove a classe ativa de todas as abas
+                $('.tab-link[data-link="' + pageId + '"]').addClass('active'); // Adiciona a classe ativa à aba selecionada
+
                 const titles = {
                     'index': 'Frente',
-                    'link2
                     'link2': 'Verso',
                     'link3': 'QR Code',
                 };
-                document.querySelector('.navbar .title').textContent = titles[pageId];
+                $('.navbar .title').text(titles[pageId]); // Atualiza o título da navbar
             }
 
             window.handleTabClick = function(pageId) {
@@ -239,6 +257,29 @@
             window.handleClose = function() {
                 // Adicione aqui a lógica para fechar a página ou voltar
             };
+
+            // Função para arrastar o QR Code
+            let isDragging = false;
+
+            const qrCodeContainer = document.querySelector('#qr-code-container');
+
+            qrCodeContainer.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                qrCodeContainer.style.transition = 'none'; // Remove a transição enquanto arrasta
+            });
+
+            qrCodeContainer.addEventListener('touchmove', (e) => {
+                if (isDragging) {
+                    const touch = e.touches[0];
+                    qrCodeContainer.style.transform = `translateX(${touch.clientX}px)`; // Move o QR Code
+                }
+            });
+
+            qrCodeContainer.addEventListener('touchend', () => {
+                isDragging = false;
+                qrCodeContainer.style.transition = 'transform 0.3s ease'; // Adiciona a transição de volta
+                qrCodeContainer.style.transform = 'translateX(0)'; // Reseta a posição
+            });
 
             // Exibir a página inicial por padrão
             showPage('index');
