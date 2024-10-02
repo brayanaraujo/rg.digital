@@ -1,144 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- Color theme for statusbar (Android only) -->
     <meta name="theme-color" content="#2196f3">
-    <!-- Your app title -->
     <title>RG Digital</title>
-    <!-- Path to Framework7 Library Bundle CSS -->
     <link rel="stylesheet" href="css/framework7-bundle.min.css">
-    <!-- CSS PERSONALIZADO PARA MENU -->
     <link rel="stylesheet" href="css/index.css">
-    <!-- Ícones Material Design -->
     <link rel="stylesheet" href="css/materialdesignicons.min.css">
-    <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
-.hidden { display: none; }
-.page-content img { max-width: 100%; transition: opacity 0.5s; }
-.update-info { margin-bottom: 10px; }
+        .hidden { display: none; }
+        .page-content { display: flex; overflow-x: hidden; } /* Permite a rolagem horizontal */
+        .page { min-width: 100vw; } /* Cada página ocupa toda a largura da tela */
+        .page-content img { max-width: 100%; transition: opacity 0.5s; }
+        .update-info { margin-bottom: 10px; }
 
-/* Navbar fixada e responsiva */
-.navbar {
-    position: fixed; /* Fixa a navbar no topo da página */
-    top: 0; /* Ajusta a posição da navbar para o topo */
-    left: 0;
-    width: 100%;
-    height: 56px; /* Ajuste conforme o tamanho da sua navbar */
-    background-color: white; /* Ajuste conforme seu tema */
-    z-index: 1000; /* Certifica-se de que fica acima de todos os outros elementos */
-    border-bottom: 1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between; /* Mantém o conteúdo da esquerda e direita fixo */
-    align-items: center;
-    padding: 0 10px;
-}
+        /* Navbar estilos... */
+        /* (manter seu estilo da navbar existente) */
 
-/* Título absolutamente fixo no centro */
-.navbar .title {
-    position: absolute; /* Mudar de fixed para absolute */
-    top: 50%; /* Centralizar verticalmente */
-    left: 50%; /* Centralizar horizontalmente */
-    transform: translate(-50%, -50%); /* Ajustar a posição para o centro */
-    height: 56px; /* Mesma altura da navbar */
-    display: flex;
-    align-items: center; /* Centralizar verticalmente o texto dentro da div */
-    text-align: center;
-    font-size: 18px; /* Ajuste conforme necessário */
-    z-index: 1001; /* Coloca acima de tudo, inclusive do botão de fechar */
-    pointer-events: none; /* Evita que o título seja clicável */
-    white-space: nowrap;
-    transition: opacity 0.5s;
-}
+        .page-content img.out { opacity: 0; }
+        .page-content img.in { opacity: 1; }
 
-/* Botão de fechar (lado esquerdo) */
-.navbar .left, .navbar .right {
-    flex: 0 0 auto;
-    padding: 0 10px;
-    z-index: 1002; /* Mantém os botões acima da navbar */
-}
-
-/* Garantindo que o botão de fechar não sobreponha o título */
-.close-link {
-    position: relative;
-    z-index: 1002; /* Garante que o botão de fechar esteja acima da navbar */
-}
-
-/* Ajustes para telas menores */
-@media (max-width: 767px) {
-    .navbar .title {
-        font-size: 16px; /* Ajuste para telas menores */
-    }
-    .navbar .left, .navbar .right {
-        padding: 0 5px;
-    }
-    .toolbar-inner i {
-        font-size: 20px; /* Ajuste o tamanho dos ícones conforme necessário */
-    }
-}
-
-/* Progresso do QR Code */
-.progress-container {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 20px;
-}
-
-.progress-bar {
-    width: 50%; /* Exemplo de progresso */
-    height: 8px;
-    background-color: #2196f3;
-    border-radius: 20px;
-}
-
-.page-content img.out {
-    opacity: 0;
-}
-
-.page-content img.in {
-    opacity: 1;
-}
-
-.navbar .title.out {
-    opacity: 0;
-}
-
-.navbar .title.in {
-    opacity: 1;
-}
+        .navbar .title.out { opacity: 0; }
+        .navbar .title.in { opacity: 1; }
     </style>
 </head>
 <body>
-    <!-- App root element -->
     <div id="app">
-        <!-- Your main view, should have "view-main" class -->
-        <div class="view view-main " data-swipe="true">
-            <!-- TAB BAR -->
+        <div class="view view-main" data-swipe="true">
             <div class="toolbar toolbar-bottom">
                 <div class="toolbar-inner display-flex">
                     <a href="#" class="tab-link link active" data-link="index" onclick="handleTabClick('index')">
                         <i class="ri-account-box-fill"></i>
-                        <span></span>
                     </a>
                     <a href="#" class="tab-link link" data-link="link2" onclick="handleTabClick('link2')">
                         <i class="ri-fingerprint-fill"></i>
-                        <span></span>
                     </a>
                     <a href="#" class="tab-link link" data-link="link3" onclick="handleTabClick('link3')">
                         <i class="ri-qr-code-line"></i>
-                        <span></span>
                     </a>
                 </div>
             </div>
 
-            <!-- Pages -->
             <div class="pages">
                 <div id="page-index" class="page">
-                    <!-- Top Navbar -->
                     <div class="navbar">
                         <div class="title">Frente</div>
                         <div class="navbar-inner">
@@ -148,13 +56,11 @@
                             <div class="right">
                                 <a href="#" class="tab-link link">
                                     <i class="ri-more-2-line"></i>
-                                    <span></span>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="update-info" id="update-info">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 23:00
@@ -166,7 +72,6 @@
                 </div>
 
                 <div id="page-link2" class="page hidden">
-                    <!-- Top Navbar -->
                     <div class="navbar">
                         <div class="title">Verso</div>
                         <div class="navbar-inner">
@@ -176,13 +81,11 @@
                             <div class="right">
                                 <a href="#" class="tab-link link">
                                     <i class="ri-more-2-line"></i>
-                                    <span></span>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="update-info" id="update-info-link2">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
@@ -194,7 +97,6 @@
                 </div>
 
                 <div id="page-link3" class="page hidden">
-                    <!-- Top Navbar -->
                     <div class="navbar">
                         <div class="title">QR Code</div>
                         <div class="navbar-inner">
@@ -204,21 +106,14 @@
                             <div class="right">
                                 <a href="#" class="tab-link link">
                                     <i class="ri-more-2-line"></i>
-                                    <span></span>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="update-info" id="update-info-link3">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
-                        </div>
-                        <div class="center" style="margin-top: 20px;">
-                            <div class="progress-container">
-                                <div class="progress-bar"></div>
-                            </div>
                         </div>
                         <div class="block">
                             <div class="center">
@@ -231,35 +126,27 @@
         </div>
     </div>
 
-    <!-- Path to Framework7 Library Bundle JS -->
     <script type="text/javascript" src="js/framework7-bundle.min.js"></script>
-    <!-- jQuery -->
-    < script type="text/javascript" src="js/jquery-3.7.0.min.js"></script>
-    <!-- Roteamento do app -->
+    <script type="text/javascript" src="js/jquery-3.7.0.min.js"></script>
     <script type="text/javascript" src="js/routes.js"></script>
     <script src="cordova.js"></script>
 
-    <!-- JavaScript para alternar páginas, swipe e atualizar data e hora -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var timerId;
 
             function showPage(pageId) {
-                // Hide all pages
                 document.querySelectorAll('.page').forEach(function(page) {
                     page.classList.add('hidden');
                 });
-                // Show the selected page
                 document.getElementById('page-' + pageId).classList.remove('hidden');
-                
-                // Update tab links
+
                 document.querySelectorAll('.tab-link').forEach(function(link) {
                     link.classList.remove('active');
                 });
                 document.querySelector(`.tab-link[data-link=${pageId}]`).classList.add('active');
             }
 
-            // Function to update the date and time
             function updateDateTime() {
                 var now = new Date();
                 var formattedDate = now.toLocaleDateString('pt-BR');
@@ -270,93 +157,74 @@
                 });
             }
 
-            // Initial date/time update
             updateDateTime();
-            timerId = setInterval(updateDateTime, 60000); // Update every minute
+            timerId = setInterval(updateDateTime, 60000);
 
-            // Handle swipe to change pages
             let touchStartX = 0;
-            let touchEndX = 0;
+            let currentPage = document.querySelector('.page:not(.hidden)');
 
             document.addEventListener('touchstart', function(event) {
                 touchStartX = event.changedTouches[0].screenX;
             });
 
-            document.addEventListener('touchend', function(event) {
-                touchEndX = event.changedTouches[0].screenX;
-                handleSwipe();
+            document.addEventListener('touchmove', function(event) {
+                let touchMoveX = event.changedTouches[0].screenX;
+                let deltaX = touchMoveX - touchStartX;
+
+                // Mover o conteúdo horizontalmente
+                currentPage.style.transform = `translateX(${deltaX}px)`;
+                event.preventDefault(); // Impede a rolagem padrão
             });
 
-            function handleSwipe() {
-                if (touchEndX < touchStartX) {
+            document.addEventListener('touchend', function(event) {
+                let touchEndX = event.changedTouches[0].screenX;
+                let threshold = 50; // Ajuste para sensibilidade da rolagem
+
+                if (touchEndX < touchStartX - threshold) {
                     // Swipe left
-                    var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
-                    var nextPageId = getNextPageId(currentPageId);
-                    animateImages(currentPageId, nextPageId);
+                    var nextPageId = getNextPageId(currentPage.id.replace('page-', ''));
+                    animateImages(currentPage.id.replace('page-', ''), nextPageId);
                     showPage(nextPageId);
-                } else if (touchEndX > touchStartX) {
+                } else if (touchEndX > touchStartX + threshold) {
                     // Swipe right
-                    var currentPageId = document.querySelector('.page:not(.hidden)').id.replace('page-', '');
-                    var prevPageId = getPrevPageId(currentPageId);
-                    animateImages(currentPageId, prevPageId);
+                    var prevPageId = getPrevPageId(currentPage.id.replace('page-', ''));
+                    animateImages(currentPage.id.replace('page-', ''), prevPageId);
                     showPage(prevPageId);
                 }
-            }
+
+                // Resete a transformação
+                currentPage.style.transform = 'translateX(0)';
+            });
 
             function getNextPageId(currentId) {
                 switch (currentId) {
-                    case 'index':
-                        return 'link2';
-                    case 'link2':
-                        return 'link3';
-                    case 'link3':
-                        return 'index';
+                    case 'index': return 'link2';
+                    case 'link2': return 'link3';
+                    case 'link3': return 'index';
                 }
             }
 
             function getPrevPageId(currentId) {
                 switch (currentId) {
-                    case 'index':
-                        return 'link3';
-                    case 'link2':
-                        return 'index';
-                    case 'link3':
-                        return 'link2';
+                    case 'index': return 'link3';
+                    case 'link2': return 'index';
+                    case 'link3': return 'link2';
                 }
             }
 
-            function handleTabClick(pageId) {
-                showPage(pageId);
-                event.preventDefault(); // Prevent default link behavior
+            function animateImages(currentId, nextId) {
+                var currentImage = document.querySelector(`#page-${currentId} img`);
+                var nextImage = document.querySelector(`#page-${nextId} img`);
+                currentImage.classList.remove('in');
+                currentImage.classList.add('out');
+                nextImage.classList.remove('out');
+                nextImage.classList.add('in');
             }
 
-            // Initialize the default page
-            showPage('index');
-
-            // Bind tab links
-            document.querySelectorAll('.tab-link').forEach(function(link) {
-                link.addEventListener('click', function(event) {
-                    var pageId = this.getAttribute('data-link');
-                    handleTabClick(pageId);
-                });
-            });
-
-            function animateImages(outPageId, inPageId) {
-                var outImage = document.querySelector(`#page-${outPageId} .page-content img`);
-                var inImage = document.querySelector(`#page-${inPageId} .page-content img`);
-                var outTitle = document.querySelector(`#page-${outPageId} .navbar .title`);
-                var inTitle = document.querySelector(`#page-${inPageId} .navbar .title`);
-                outImage.classList.add('out');
-                inImage.classList.add('in');
-                outTitle.classList.add('out');
-                inTitle.classList.add('in');
-                setTimeout(function() {
-                    outImage.classList.remove('out');
-                    inImage.classList.remove('in');
-                    outTitle.classList.remove('out');
-                    inTitle.classList.remove('in');
-                }, 500);
-            }
+            window.handleTabClick = function(link) {
+                showPage(link);
+                currentPage = document.getElementById('page-' + link);
+            };
         });
     </script>
 </body>
