@@ -25,7 +25,7 @@
 /* Navbar fixada e responsiva */
 .navbar {
     position: fixed; /* Fixa a navbar no topo da página */
-    top: env(safe-area-inset-top); /* Ajusta a posição da navbar para evitar sobreposição com a barra de ferramentas */
+    top: 0; /* Ajusta a posição da navbar para o topo */
     left: 0;
     width: 100%;
     height: 56px; /* Ajuste conforme o tamanho da sua navbar */
@@ -40,13 +40,13 @@
 
 /* Título absolutamente fixo no centro */
 .navbar .title {
-    position: fixed; /* Garante que o título fique fixo na tela */
-    top: env(safe-area-inset-top); /* Ajusta a posição do título para evitar sobreposição com a barra de ferramentas */
-    left: 50%;
-    transform: translateX(-50%); /* Centraliza horizontalmente */
+    position: absolute; /* Mudar de fixed para absolute */
+    top: 50%; /* Centralizar verticalmente */
+    left: 50%; /* Centralizar horizontalmente */
+    transform: translate(-50%, -50%); /* Ajustar a posição para o centro */
     height: 56px; /* Mesma altura da navbar */
     display: flex;
-    align-items: center; /* Centraliza verticalmente o texto dentro da div */
+    align-items: center; /* Centralizar verticalmente o texto dentro da div */
     text-align: center;
     font-size: 18px; /* Ajuste conforme necessário */
     z-index: 1001; /* Coloca acima de tudo, inclusive do botão de fechar */
