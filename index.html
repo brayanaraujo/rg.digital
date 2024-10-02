@@ -18,70 +18,73 @@
     <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
-    .hidden { display: none; }
-    .page-content img { max-width: 100%; }
-    .update-info { margin-bottom: 10px; }
+   .hidden { display: none; }
+.page-content img { max-width: 100%; }
+.update-info { margin-bottom: 10px; }
 
-    /* Ajuste da altura da tab bar */
-    .toolbar.toolbar-bottom {
-        height: 50px; /* Altura da barra */
-        line-height: 50px; /* Centraliza o ícone verticalmente */
-        margin-bottom: 20px; /* Margem inferior para subir a barra */
-        padding-bottom: env(safe-area-inset-bottom, 10px); /* Segurança para notch */
-        position: fixed; /* Fixa a barra na parte inferior */
-        bottom: 0; /* Fica sempre na parte inferior */
-        left: 0; /* Alinha à esquerda */
-        right: 0; /* Alinha à direita */
-        background-color: white; /* Fundo branco para melhor contraste */
-        z-index: 10; /* Garante que fique acima de outros elementos */
+/* Ajuste da altura da tab bar */
+.toolbar.toolbar-bottom {
+    height: 50px; /* Altura da barra */
+    line-height: 50px; /* Centraliza o ícone verticalmente */
+    margin-bottom: 20px; /* Margem inferior para subir a barra */
+    padding-bottom: env(safe-area-inset-bottom, 10px); /* Segurança para notch */
+    position: fixed; /* Fixa a barra na parte inferior */
+    bottom: 0; /* Fica sempre na parte inferior */
+    left: 0; /* Alinha à esquerda */
+    right: 0; /* Alinha à direita */
+    background-color: white; /* Fundo branco para melhor contraste */
+    z-index: 10; /* Garante que fique acima de outros elementos */
+}
+
+.toolbar-inner {
+    display: flex; /* Usar flexbox */
+    justify-content: space-between; /* Espaçamento entre os elementos */
+    align-items: center; /* Alinha os itens verticalmente */
+    padding: 0 5px; /* Ajuste de padding para melhor espaçamento */
+}
+
+/* Centralização dos títulos da navbar */
+.navbar .title {
+    text-align: center;
+    flex-grow: 1; /* Permite que o título ocupe o espaço disponível */
+}
+
+.navbar .left, .navbar .right {
+    flex: 0 0 auto;
+}
+
+/* Ajustando as configurações para tela cheia */
+@media (display-mode: fullscreen) {
+    .navbar, .toolbar.toolbar-bottom {
+        display: flex; /* Garante que permaneçam visíveis */
     }
+}
 
-    .toolbar-inner {
-        padding: 0 5px;
-    }
-
-    /* Centralização dos títulos da navbar */
+@media (max-width: 767px) {
     .navbar .title {
-        text-align: center;
-        flex: 1;
+        font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
     }
 
-    .navbar .left, .navbar .right {
-        flex: 0 0 auto;
+    /* Ajuste do espaço dos ícones na tab bar */
+    .toolbar-inner i {
+        font-size: 24px; /* Aumenta o tamanho do ícone */
     }
+}
 
-    /* Ajustando as configurações para tela cheia */
-    @media (display-mode: fullscreen) {
-        .navbar, .toolbar.toolbar-bottom {
-            display: flex; /* Garante que permaneçam visíveis */
-        }
-    }
+/* Estilos para a tab bar ativa */
+.tab-link.active {
+    color: #2196f3; /* Cor do link ativo */
+}
 
-    @media (max-width: 767px) {
-        .navbar .title {
-            font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
-        }
+/* Ajuste da margem superior da imagem do QR Code */
+#page-link3 .block {
+    margin-top: 20px; /* Ajuste conforme necessário */
+}
 
-        /* Ajuste do espaço dos ícones na tab bar */
-        .toolbar-inner i {
-            font-size: 24px; /* Aumenta o tamanho do ícone */
-        }
-    }
-
-    /* Estilos para a tab bar ativa */
-    .tab-link.active {
-        color: #2196f3; /* Cor do link ativo */
-    }
-
-    /* Ajuste da margem superior da imagem do QR Code */
-    #page-link3 .block {
-        margin-top: 20px; /* Ajuste conforme necessário */
-    }
-
-    /* Adicionando padding inferior nas páginas */
-    .page-content {
-        padding-bottom: 70px; /* Para garantir que o conteúdo não fique sobre a barra */
-    }
+/* Adicionando padding inferior nas páginas */
+.page-content {
+    padding-bottom: 70px; /* Para garantir que o conteúdo não fique sobre a barra */
+}
 </style>
 </head>
 <body>
