@@ -18,16 +18,16 @@
     <!-- Ícones do Remix Icon -->
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
-   .hidden { display: none; }
-.page-content img { max-width: 100%; }
-.update-info { margin-bottom: 10px; }
+.hidden { display: none; }
+.page-content img { max-width: 100%; height: auto; }
+.update-info { margin-bottom: 1rem; }
 
 /* Ajuste da altura da tab bar */
 .toolbar.toolbar-bottom {
-    height: 50px; /* Altura da barra */
-    line-height: 50px; /* Centraliza o ícone verticalmente */
-    margin-bottom: 20px; /* Margem inferior para subir a barra */
-    padding-bottom: env(safe-area-inset-bottom, 10px); /* Segurança para notch */
+    height: 5vh; /* Altura proporcional à viewport */
+    line-height: 5vh; /* Centraliza o ícone verticalmente */
+    margin-bottom: 2vh; /* Margem inferior para subir a barra */
+    padding-bottom: env(safe-area-inset-bottom, 1rem); /* Segurança para notch */
     position: fixed; /* Fixa a barra na parte inferior */
     bottom: 0; /* Fica sempre na parte inferior */
     left: 0; /* Alinha à esquerda */
@@ -40,17 +40,19 @@
     display: flex; /* Usar flexbox */
     justify-content: space-between; /* Espaçamento entre os elementos */
     align-items: center; /* Alinha os itens verticalmente */
-    padding: 0 5px; /* Ajuste de padding para melhor espaçamento */
+    padding: 0 1rem; /* Ajuste de padding para melhor espaçamento */
 }
 
 /* Centralização dos títulos da navbar */
 .navbar .title {
     text-align: center;
     flex-grow: 1; /* Permite que o título ocupe o espaço disponível */
+    font-size: 2.5vw; /* Tamanho de fonte proporcional */
 }
 
 .navbar .left, .navbar .right {
     flex: 0 0 auto;
+    font-size: 2vw; /* Tamanho de fonte proporcional para os links */
 }
 
 /* Ajustando as configurações para tela cheia */
@@ -62,12 +64,12 @@
 
 @media (max-width: 767px) {
     .navbar .title {
-        font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
+        font-size: 4vw; /* Ajuste o tamanho do texto conforme necessário */
     }
 
     /* Ajuste do espaço dos ícones na tab bar */
     .toolbar-inner i {
-        font-size: 24px; /* Aumenta o tamanho do ícone */
+        font-size: 5vw; /* Aumenta o tamanho do ícone proporcionalmente */
     }
 }
 
@@ -78,13 +80,26 @@
 
 /* Ajuste da margem superior da imagem do QR Code */
 #page-link3 .block {
-    margin-top: 20px; /* Ajuste conforme necessário */
+    margin-top: 2vh; /* Ajuste conforme necessário */
 }
 
 /* Adicionando padding inferior nas páginas */
 .page-content {
-    padding-bottom: 70px; /* Para garantir que o conteúdo não fique sobre a barra */
+    padding-bottom: 10vh; /* Para garantir que o conteúdo não fique sobre a barra */
 }
+
+/* Imagens dentro das páginas */
+.block img {
+    width: 90%; /* Largura proporcional */
+    max-width: 300px; /* Tamanho máximo para não esticar demais em telas grandes */
+    height: auto; /* Mantém a proporção */
+}
+
+/* Estilização das atualizações de informação */
+.update-info i {
+    font-size: 2.5vw; /* Tamanho proporcional do ícone */
+}
+
 </style>
 </head>
 <body>
