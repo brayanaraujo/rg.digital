@@ -24,10 +24,16 @@
 
     /* Ajuste da altura da tab bar */
     .toolbar.toolbar-bottom {
-        height: 50px; /* Ajuste conforme necessário */
+        height: 50px; /* Altura da barra */
         line-height: 50px; /* Centraliza o ícone verticalmente */
-        padding-bottom: env(safe-area-inset-bottom, 10px); /* Adiciona segurança para dispositivos com notch */
-        position: relative; /* Para evitar sobreposição */
+        margin-bottom: 20px; /* Margem inferior para subir a barra */
+        padding-bottom: env(safe-area-inset-bottom, 10px); /* Segurança para notch */
+        position: fixed; /* Fixa a barra na parte inferior */
+        bottom: 0; /* Fica sempre na parte inferior */
+        left: 0; /* Alinha à esquerda */
+        right: 0; /* Alinha à direita */
+        background-color: white; /* Fundo branco para melhor contraste */
+        z-index: 10; /* Garante que fique acima de outros elementos */
     }
 
     .toolbar-inner {
@@ -42,6 +48,13 @@
 
     .navbar .left, .navbar .right {
         flex: 0 0 auto;
+    }
+
+    /* Ajustando as configurações para tela cheia */
+    @media (display-mode: fullscreen) {
+        .navbar, .toolbar.toolbar-bottom {
+            display: flex; /* Garante que permaneçam visíveis */
+        }
     }
 
     @media (max-width: 767px) {
@@ -67,10 +80,9 @@
 
     /* Adicionando padding inferior nas páginas */
     .page-content {
-        padding-bottom: 60px; /* Para garantir que o conteúdo não fique sobre a barra */
+        padding-bottom: 70px; /* Para garantir que o conteúdo não fique sobre a barra */
     }
 </style>
-
 </head>
 <body>
     <!-- App root element -->
