@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,34 +12,59 @@
     <link rel="stylesheet" href="css/remixicon.css">
     <style>
         .hidden { display: none; }
-        .page-content { display: flex; overflow-x: hidden; } /* Permite a rolagem horizontal */
-        .page { min-width: 100vw; } /* Cada página ocupa toda a largura da tela */
-        .page-content img { max-width: 100%; transition: opacity 0.5s; }
-        .update-info { margin-bottom: 10px; }
+        .page-content { overflow-x: hidden; overflow-y: hidden; position: relative; }
+        .scroll-images { display: flex; transition: transform 0.5s ease; }
+        .scroll-images img { max-width: 100%; }
 
-        /* Navbar estilos... */
-        /* (manter seu estilo da navbar existente) */
+        /* Navbar fixada e responsiva */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 56px;
+            background-color: white;
+            z-index: 1000;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
 
-        .page-content img.out { opacity: 0; }
-        .page-content img.in { opacity: 1; }
-
-        .navbar .title.out { opacity: 0; }
-        .navbar .title.in { opacity: 1; }
+        .navbar .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 56px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            font-size: 18px;
+            z-index: 1001;
+            pointer-events: none;
+            white-space: nowrap;
+            transition: opacity 0.5s;
+        }
     </style>
 </head>
 <body>
     <div id="app">
-        <div class="view view-main" data-swipe="true">
+        <div class="view view-main">
             <div class="toolbar toolbar-bottom">
                 <div class="toolbar-inner display-flex">
                     <a href="#" class="tab-link link active" data-link="index" onclick="handleTabClick('index')">
                         <i class="ri-account-box-fill"></i>
+                        <span></span>
                     </a>
                     <a href="#" class="tab-link link" data-link="link2" onclick="handleTabClick('link2')">
                         <i class="ri-fingerprint-fill"></i>
+                        <span></span>
                     </a>
                     <a href="#" class="tab-link link" data-link="link3" onclick="handleTabClick('link3')">
                         <i class="ri-qr-code-line"></i>
+                        <span></span>
                     </a>
                 </div>
             </div>
@@ -53,20 +77,15 @@
                             <div class="left">
                                 <a href="#" class="tab-link link close-link">Fechar</a>
                             </div>
-                            <div class="right">
-                                <a href="#" class="tab-link link">
-                                    <i class="ri-more-2-line"></i>
-                                </a>
-                            </div>
                         </div>
                     </div>
-
                     <div class="page-content">
                         <div class="update-info" id="update-info">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 23:00
                         </div>
-                        <div class="block" style="margin: 0;">
-                            <div class="center"><img src="images/frente.png" alt="Frente"></div>
+                        <div class="scroll-images" id="scroll-images">
+                            <img src="images/frente.png" alt="Frente">
+                            <img src="images/verso.png" alt="Verso" class="hidden">
                         </div>
                     </div>
                 </div>
@@ -78,20 +97,15 @@
                             <div class="left">
                                 <a href="#" class="tab-link link close-link">Fechar</a>
                             </div>
-                            <div class="right">
-                                <a href="#" class="tab-link link">
-                                    <i class="ri-more-2-line"></i>
-                                </a>
-                            </div>
                         </div>
                     </div>
-
                     <div class="page-content">
                         <div class="update-info" id="update-info-link2">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
                         </div>
-                        <div class="block" style="margin: 0;">
-                            <div class="center"><img src="images/verso.png" alt="Verso"></div>
+                        <div class="scroll-images" id="scroll-images-link2">
+                            <img src="images/verso.png" alt="Verso">
+                            <img src="images/frente.png" alt="Frente" class="hidden">
                         </div>
                     </div>
                 </div>
@@ -103,22 +117,14 @@
                             <div class="left">
                                 <a href="#" class="tab-link link close-link">Fechar</a>
                             </div>
-                            <div class="right">
-                                <a href="#" class="tab-link link">
-                                    <i class="ri-more-2-line"></i>
-                                </a>
-                            </div>
                         </div>
                     </div>
-
                     <div class="page-content">
                         <div class="update-info" id="update-info-link3">
                             <i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em 24/08/2024 às 18:46
                         </div>
-                        <div class="block">
-                            <div class="center">
-                                <img src="images/qrcode.png" width="75%">
-                            </div>
+                        <div class="scroll-images" id="scroll-images-link3">
+                            <img src="images/qrcode.png" alt="QR Code">
                         </div>
                     </div>
                 </div>
@@ -133,98 +139,42 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var timerId;
+            let currentIndex = 0; // índice atual da imagem
+            const images = document.querySelectorAll('.scroll-images img');
 
-            function showPage(pageId) {
-                document.querySelectorAll('.page').forEach(function(page) {
-                    page.classList.add('hidden');
+            function updateImages() {
+                images.forEach((img, index) => {
+                    img.classList.toggle('hidden', index !== currentIndex);
                 });
-                document.getElementById('page-' + pageId).classList.remove('hidden');
-
-                document.querySelectorAll('.tab-link').forEach(function(link) {
-                    link.classList.remove('active');
-                });
-                document.querySelector(`.tab-link[data-link=${pageId}]`).classList.add('active');
+                const scrollContainer = images[0].parentElement;
+                scrollContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
             }
-
-            function updateDateTime() {
-                var now = new Date();
-                var formattedDate = now.toLocaleDateString('pt-BR');
-                var formattedTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-                var updateInfos = document.querySelectorAll('.update-info');
-                updateInfos.forEach(function(updateInfo) {
-                    updateInfo.innerHTML = `<i class="ri-checkbox-circle-fill" style="font-size: 30px;"></i> Atualizado em ${formattedDate} às ${formattedTime}`;
-                });
-            }
-
-            updateDateTime();
-            timerId = setInterval(updateDateTime, 60000);
 
             let touchStartX = 0;
-            let currentPage = document.querySelector('.page:not(.hidden)');
+            let touchEndX = 0;
 
             document.addEventListener('touchstart', function(event) {
                 touchStartX = event.changedTouches[0].screenX;
             });
 
-            document.addEventListener('touchmove', function(event) {
-                let touchMoveX = event.changedTouches[0].screenX;
-                let deltaX = touchMoveX - touchStartX;
-
-                // Mover o conteúdo horizontalmente
-                currentPage.style.transform = `translateX(${deltaX}px)`;
-                event.preventDefault(); // Impede a rolagem padrão
-            });
-
             document.addEventListener('touchend', function(event) {
-                let touchEndX = event.changedTouches[0].screenX;
-                let threshold = 50; // Ajuste para sensibilidade da rolagem
-
-                if (touchEndX < touchStartX - threshold) {
-                    // Swipe left
-                    var nextPageId = getNextPageId(currentPage.id.replace('page-', ''));
-                    animateImages(currentPage.id.replace('page-', ''), nextPageId);
-                    showPage(nextPageId);
-                } else if (touchEndX > touchStartX + threshold) {
-                    // Swipe right
-                    var prevPageId = getPrevPageId(currentPage.id.replace('page-', ''));
-                    animateImages(currentPage.id.replace('page-', ''), prevPageId);
-                    showPage(prevPageId);
-                }
-
-                // Resete a transformação
-                currentPage.style.transform = 'translateX(0)';
+                touchEndX = event.changedTouches[0].screenX;
+                handleSwipe();
             });
 
-            function getNextPageId(currentId) {
-                switch (currentId) {
-                    case 'index': return 'link2';
-                    case 'link2': return 'link3';
-                    case 'link3': return 'index';
+            function handleSwipe() {
+                if (touchEndX < touchStartX) {
+                    // Swipe left
+                    currentIndex = (currentIndex + 1) % images.length;
+                } else if (touchEndX > touchStartX) {
+                    // Swipe right
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
                 }
+                updateImages();
             }
 
-            function getPrevPageId(currentId) {
-                switch (currentId) {
-                    case 'index': return 'link3';
-                    case 'link2': return 'index';
-                    case 'link3': return 'link2';
-                }
-            }
-
-            function animateImages(currentId, nextId) {
-                var currentImage = document.querySelector(`#page-${currentId} img`);
-                var nextImage = document.querySelector(`#page-${nextId} img`);
-                currentImage.classList.remove('in');
-                currentImage.classList.add('out');
-                nextImage.classList.remove('out');
-                nextImage.classList.add('in');
-            }
-
-            window.handleTabClick = function(link) {
-                showPage(link);
-                currentPage = document.getElementById('page-' + link);
-            };
+            // Inicializa as imagens
+            updateImages();
         });
     </script>
 </body>
